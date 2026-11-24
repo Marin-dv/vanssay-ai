@@ -51,6 +51,12 @@ head = f"""<!doctype html>
     f"  <url><loc>{URL}</loc><lastmod>{date.today().isoformat()}</lastmod></url>\n"
     "</urlset>\n", encoding="utf-8")
 
+# Social preview: a screenshot of the live hero (img/og-base.jpg, 1200x630) when present,
+# otherwise the hero poster with the centered logo drawn on top.
+if (ROOT / "img" / "og-base.jpg").exists():
+    Image.open(ROOT / "img" / "og-base.jpg").convert("RGB").resize((1200, 630)).save(ROOT / "img" / "og.jpg", quality=86)
+    print("built index.html, robots.txt, sitemap.xml, img/og.jpg (from og-base.jpg)")
+    raise SystemExit
 # Social preview: the hero poster with the centered logo, like the hero itself.
 poster = Image.open(ROOT / "img" / "hero-poster.webp").convert("RGB")
 w = 1200
