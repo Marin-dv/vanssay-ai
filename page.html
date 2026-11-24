@@ -631,7 +631,7 @@ footer { border-top: 1px solid var(--g2); }
       SCALE = Math.max(0.6, Math.min(dpr, Math.sqrt(700000 / Math.max(1, r.width * r.height))));
       W = Math.max(64, Math.round(r.width * SCALE));
       H = Math.max(36, Math.round(r.height * SCALE));
-      var sh = Math.min(W, H); buildGrid(W / sh, H / sh);
+      var sh = Math.max(Math.min(W, H), 400 * SCALE); buildGrid(W / sh, H / sh);   // tile size never drops below what a 400px-tall hero gets, so thin strips keep big tiles
       cv.width = S.width = W; cv.height = S.height = H;
       B1.width = B2.width = Math.max(32, Math.round(W / 2));
       B1.height = B2.height = Math.max(18, Math.round(H / 2));
