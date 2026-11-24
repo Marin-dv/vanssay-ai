@@ -195,7 +195,14 @@ canvas.hero-media.css-blur { filter: blur(40px); transform: scale(1.1); }
 .co { width: 40px; height: 40px; border-radius: 9px; background: var(--black); display: grid; place-items: center; overflow: hidden; }
 .co img { width: 100%; height: 100%; object-fit: cover; }
 .co.glyph img { width: 56%; height: 56%; object-fit: contain; }
-.acc details p { padding: 34px 16px 18px; font-size: 18px; line-height: 1.42; letter-spacing: -.02em; }
+.acc details p { padding: 34px 16px 14px; font-size: 18px; line-height: 1.42; letter-spacing: -.02em; }
+.tile { background: var(--c); display: grid; place-items: center; }
+.wicon.tile svg, .av.tile svg { width: 52%; height: 52%; }
+.av.tile { width: 40px; height: 40px; border-radius: 8px; }
+.go { justify-self: end; width: 30px; height: 30px; border-radius: 50%; background: var(--white); display: grid; place-items: center; font-size: 18px; line-height: 1; color: #6e6e73; transition: transform .2s ease; }
+.acc details[open] .go { transform: rotate(45deg); }
+.more-link { display: inline-block; margin: 0 16px 18px; font-size: 15px; font-weight: 600; border-bottom: 1px solid currentColor; }
+.more-link:hover { opacity: .6; }
 
 /* Pricing */
 .pricing { padding: 0 var(--pad-r) clamp(80px, 10vw, 140px) var(--pad); }
@@ -268,7 +275,7 @@ footer { border-top: 1px solid var(--g2); }
     <span class="nt"><b>Réserver un appel</b><span>Parlons de votre équipe</span></span>
     <span class="chip">CONTACT</span>
   </a>
-  <a class="note" id="note2" href="#cas">
+  <a class="note" id="note2" href="cas/le-typographe.html">
     <span class="ni"><img src="img/lt-logo.webp" alt=""></span>
     <span class="nt"><b>Le Typographe</b><span>Nouvelle étude de cas</span></span>
     <span class="chip">VOIR</span>
@@ -306,7 +313,7 @@ footer { border-top: 1px solid var(--g2); }
       </div>
       <div>
         <p class="label">Étude de cas</p>
-        <a class="media-card" href="#cas">
+        <a class="media-card" href="cas/le-typographe.html">
           <img src="img/lt-shop.webp" alt="L’intérieur de la papeterie Le Typographe" loading="lazy" width="1000" height="1250">
           <span class="mc-foot"><img class="mc-ic" src="img/lt-logo.webp" alt=""><span><b>Le Typographe</b><span>Papeterie, Bruxelles</span></span></span>
         </a>
@@ -320,41 +327,41 @@ footer { border-top: 1px solid var(--g2); }
       <p>Envie d’en voir plus&nbsp;? <a href="#contact">Réserver un appel</a></p>
     </div>
     <div class="grid">
-      <a class="wcard" href="#cas">
+      <a class="wcard" href="cas/le-typographe.html">
         <img src="img/lt-notebooks.webp" alt="Carnets Hyper Chaud de Le Typographe" loading="lazy" width="1080" height="1080">
         <span class="wfoot"><span class="wicon"><img src="img/lt-logo.webp" alt=""></span><span><b>Le Typographe</b><span>1&nbsp;765 fiches produits, mises à jour par l’IA</span></span></span>
       </a>
-      <div class="wcard">
+      <a class="wcard" href="https://vanssay.net/wix/" target="_blank" rel="noopener">
         <img src="img/wix-aria.webp" alt="L’assistant IA de Wix répond avec les avis Google de Le Typographe" loading="lazy" width="1000" height="750">
         <span class="wfoot"><span class="wicon"><img src="img/icon-wix.png" alt=""></span><span><b>Google Reviews 2027</b><span>L’assistant IA de Wix connaît vos avis</span></span></span>
-      </div>
-      <div class="wcard">
+      </a>
+      <a class="wcard" href="https://vanssay.net/reviews/webflow/" target="_blank" rel="noopener">
         <span class="soon">BIENTÔT</span>
         <img src="img/webflow-reviews-cover.webp" alt="Reviews pour Webflow" loading="lazy" width="900" height="595">
         <span class="wfoot"><span class="wicon"><img src="img/icon-reviews.png" alt=""></span><span><b>Reviews pour Webflow</b><span>Vos avis Google sur Webflow</span></span></span>
-      </div>
-      <div class="wcard">
+      </a>
+      <a class="wcard" href="https://vanssay.net/reviews.html" target="_blank" rel="noopener">
         <img src="img/cover-reviews.webp" alt="Reviews pour Framer" loading="lazy" width="960" height="720">
-        <span class="wfoot"><span class="wicon"><img src="img/icon-reviews.png" alt=""></span><span><b>Reviews</b><span>Avis Google et Trustpilot sur Framer</span></span></span>
-      </div>
-      <div class="wcard">
+        <span class="wfoot"><span class="wicon tile" style="--c:#ff7a45"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg></span><span><b>Reviews</b><span>Avis Google et Trustpilot sur Framer</span></span></span>
+      </a>
+      <a class="wcard" href="https://vanssay.net/instagram.html" target="_blank" rel="noopener">
         <img src="img/cover-instagram.webp" alt="Instagram Feed" loading="lazy" width="960" height="720">
-        <span class="wfoot"><span class="wicon glyph"><img src="img/glyph-white.png" alt=""></span><span><b>Instagram Feed</b><span>Votre fil Instagram, à jour tout seul</span></span></span>
-      </div>
-      <div class="wcard">
+        <span class="wfoot"><span class="wicon"><img src="img/icon-instagram.svg" alt=""></span><span><b>Instagram Feed</b><span>Votre fil Instagram, à jour tout seul</span></span></span>
+      </a>
+      <a class="wcard" href="https://vanssay.net/geoblock.html" target="_blank" rel="noopener">
         <img src="img/cover-bouncer.webp" alt="Bouncer" loading="lazy" width="960" height="720">
-        <span class="wfoot"><span class="wicon glyph"><img src="img/glyph-white.png" alt=""></span><span><b>Bouncer</b><span>Bloquer des pays et les VPN</span></span></span>
-      </div>
-      <div class="wcard wide">
+        <span class="wfoot"><span class="wicon tile" style="--c:#19c3b1"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span><span><b>Bouncer</b><span>Bloquer des pays et les VPN</span></span></span>
+      </a>
+      <a class="wcard wide" href="cas/mises-en-ligne.html">
         <video class="wmedia" autoplay muted loop playsinline poster="img/wix-promo-poster.jpg" aria-label="Extrait de la vidéo de présentation de Google Reviews 2027">
           <source src="img/wix-promo.mp4" type="video/mp4">
         </video>
-        <span class="wfoot"><span class="wicon"><img src="img/icon-wix.png" alt=""></span><span><b>Google Reviews 2027</b><span>Fiche, visuels et vidéo faits avec l’IA</span></span></span>
-      </div>
-      <div class="wcard">
+        <span class="wfoot"><span class="wicon tile" style="--c:#7c5cff"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 2.2 5 6 5 10l-2 3H9l-2-3c0-4 2-7.8 5-10z"/><circle cx="12" cy="10" r="1.7"/><path d="m9.5 16-1.5 4M14.5 16l1.5 4"/></svg></span><span><b>Une app Wix en deux jours</b><span>Fiche, visuels et vidéo faits avec l’IA</span></span></span>
+      </a>
+      <a class="wcard" href="https://vanssay.net/router.html" target="_blank" rel="noopener">
         <img src="img/cover-router.webp" alt="Router" loading="lazy" width="960" height="720">
-        <span class="wfoot"><span class="wicon glyph"><img src="img/glyph-white.png" alt=""></span><span><b>Router</b><span>La bonne page pour chaque visiteur</span></span></span>
-      </div>
+        <span class="wfoot"><span class="wicon tile" style="--c:#ff4f9a"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="18" r="2"/><path d="M8 18h7a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h9"/><path d="m15 3 3 3-3 3"/></svg></span><span><b>Router</b><span>La bonne page pour chaque visiteur</span></span></span>
+      </a>
     </div>
   </section>
 
@@ -382,28 +389,34 @@ footer { border-top: 1px solid var(--g2); }
     <div class="acc">
       <p class="label">Cas concrets</p>
       <details open>
-        <summary><img class="av" src="img/lt-shop.webp" alt=""><span class="who"><b>Le Typographe</b><span>Papeterie haut de gamme, Bruxelles</span></span><span class="co"><img src="img/lt-logo.webp" alt=""></span></summary>
+        <summary><img class="av" src="img/lt-shop.webp" alt=""><span class="who"><b>Le Typographe</b><span>Papeterie haut de gamme, Bruxelles</span></span><span class="go" aria-hidden="true">+</span></summary>
         <p>En un après-midi avec la gérante&nbsp;: sa boîte Gmail connectée à Claude, Claude ajouté dans Chrome, et quatre pages de son site WordPress corrigées en quelques minutes au lieu de plusieurs heures. Sa boutique en ligne compte près de 900 produits, chacun en français et en anglais, soit environ 1&nbsp;765 fiches. Les mettre à jour à la main prenait des heures. Une routine s’en charge maintenant, guidée par un fichier qui décrit la boutique, son éthique et son goût visuel.</p>
+        <a class="more-link" href="cas/le-typographe.html">Lire l’étude de cas →</a>
       </details>
       <details>
-        <summary><img class="av" src="img/headshot.webp" alt=""><span class="who"><b>Support client</b><span>Vanssay, mon entreprise</span></span><span class="co glyph"><img src="img/glyph-white.png" alt=""></span></summary>
-        <p>Un mail arrive. L’IA retrouve le compte du client, vérifie le problème sur le vrai produit et propose une réponse dans mon ton. Je relis, j’envoie.</p>
+        <summary><span class="av tile" style="--c:#2b50ff"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg></span><span class="who"><b>Support client</b><span>L’IA fait l’enquête, je relis</span></span><span class="go" aria-hidden="true">+</span></summary>
+        <p>Un mail arrive. L’IA retrouve le compte du client, vérifie le problème sur le vrai produit, corrige quand elle peut et rédige la réponse dans mon ton. Je relis, j’envoie.</p>
+        <a class="more-link" href="cas/support-client.html">Voir deux vrais échanges →</a>
       </details>
       <details>
-        <summary><img class="av" src="img/headshot.webp" alt=""><span class="who"><b>Mémoire de l’entreprise</b><span>78 notes, 31 routines</span></span><span class="co glyph"><img src="img/glyph-white.png" alt=""></span></summary>
+        <summary><span class="av tile" style="--c:#7c5cff"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg></span><span class="who"><b>Mémoire de l’entreprise</b><span>77 notes, 30 routines</span></span><span class="go" aria-hidden="true">+</span></summary>
         <p>Un fichier décrit mes produits, mes clients, mes règles et mes décisions passées. Chaque séance de travail repart de là, au lieu de repartir de zéro.</p>
+        <a class="more-link" href="cas/memoire.html">Lire l’étude de cas →</a>
       </details>
       <details>
-        <summary><img class="av" src="img/headshot.webp" alt=""><span class="who"><b>Mises en ligne</b><span>Une application Wix en deux jours</span></span><span class="co glyph"><img src="img/glyph-white.png" alt=""></span></summary>
+        <summary><span class="av tile" style="--c:#ff7a45"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 2.2 5 6 5 10l-2 3H9l-2-3c0-4 2-7.8 5-10z"/><circle cx="12" cy="10" r="1.7"/><path d="m9.5 16-1.5 4M14.5 16l1.5 4"/></svg></span><span class="who"><b>Mises en ligne</b><span>Une application Wix en deux jours</span></span><span class="go" aria-hidden="true">+</span></summary>
         <p>De la décision à une application en ligne sur Wix en deux jours, en novembre 2026. Chaque étape attend mon accord avant de partir.</p>
+        <a class="more-link" href="cas/mises-en-ligne.html">Lire l’étude de cas →</a>
       </details>
       <details>
-        <summary><img class="av" src="img/headshot.webp" alt=""><span class="who"><b>Facturation</b><span>Factures et ventes, sans moi</span></span><span class="co glyph"><img src="img/glyph-white.png" alt=""></span></summary>
-        <p>Abonnement payé, facture émise avec le numéro suivant de la série, vente ajoutée au tableau de bord.</p>
+        <summary><span class="av tile" style="--c:#19c3b1"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span><span class="who"><b>Facturation</b><span>Factures et ventes, sans moi</span></span><span class="go" aria-hidden="true">+</span></summary>
+        <p>Abonnement payé, facture émise avec le numéro suivant de la série, TVA appliquée, vente ajoutée au tableau de bord.</p>
+        <a class="more-link" href="cas/facturation.html">Lire l’étude de cas →</a>
       </details>
       <details>
-        <summary><img class="av" src="img/headshot.webp" alt=""><span class="who"><b>Administratif</b><span>Même les impôts</span></span><span class="co glyph"><img src="img/glyph-white.png" alt=""></span></summary>
-        <p>Déclaration de CFE, demande de numéro de TVA, courriers aux impôts&nbsp;: préparés avec l’IA, vérifiés par moi.</p>
+        <summary><span class="av tile" style="--c:#ff4f9a"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M10 12h5M10 16h5"/></svg></span><span class="who"><b>Administratif</b><span>Même les impôts</span></span><span class="go" aria-hidden="true">+</span></summary>
+        <p>Déclaration de CFE, demande de numéro de TVA, déclarations aux douanes&nbsp;: préparées avec l’IA, vérifiées par moi.</p>
+        <a class="more-link" href="cas/administratif.html">Lire l’étude de cas →</a>
       </details>
     </div>
   </section>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
+  <title>Instagram Feed</title>
+  <!--
+    Marketplace icon = the plugin's own top-left mark (components/Logo.tsx):
+    a simplified Instagram post, INVERTED. The gradient fills the whole tile
+    and every mark is white on top of it. There is no inset white card: the
+    tile itself is the post, which is what lets the glyph be large.
+
+    Layout rule: every piece of chrome is 4.4 tall and sits 3.0 from the tile
+    edge. That fixes the bands at 4.4 + 2*3.0 = 10.4, so the dividers land at
+    10.4 and 29.6 and the image band is 19.2 with the glyph at 94% of it.
+    Sizing the heart and the bubble by HEIGHT (not width) is what makes the two
+    chrome bands weigh the same; sizing them by width made the action band look
+    heavier than the header even though the gaps measured equal.
+
+    Strokes: 0.72 chrome, 0.66 actions, 0.44 dividers, 1.35 for the glyph.
+    These are heavier than the old white card version because white on the
+    gradient needs more weight than gradient ink on white to read the same.
+
+    The heart and comment follow the standard Instagram action icon shapes:
+    the heart is wider than tall (about 1.15:1) with a SHALLOW cleft, and the
+    comment is a full circle with a small SHARP tail at the lower right: the
+    outline stays exactly on the rim everywhere except a bump spanning about
+    45 to 63 degrees that reaches 1.32r at 54 degrees. It needs a miter join,
+    not round, or the point is sanded off and it reads as a blob.
+    Keep in sync with Icons.tsx IconFeedPost.
+    NOTE: never write two hyphens in a row inside this comment. XML forbids it
+    and the whole file then fails to parse, rendering nothing at all.
+  -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f6913d"/>
+      <stop offset="0.55" stop-color="#e0457b"/>
+      <stop offset="1" stop-color="#7452e0"/>
+    </linearGradient>
+  </defs>
+  <rect width="40" height="40" rx="7" fill="url(#g)"/>
+
+  <!-- header band -->
+  <circle cx="5.2" cy="5.2" r="2.2" fill="none" stroke="#ffffff" stroke-width="0.72" opacity="0.92"/>
+  <line x1="9.4" y1="4.35" x2="21" y2="4.35" stroke="#ffffff" stroke-width="0.72" stroke-linecap="round" opacity="0.78"/>
+  <line x1="9.4" y1="6.6" x2="16.3" y2="6.6" stroke="#ffffff" stroke-width="0.72" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- band dividers -->
+  <g stroke="#ffffff" stroke-width="0.44" opacity="0.4">
+    <line x1="0" y1="10.4" x2="40" y2="10.4"/>
+    <line x1="0" y1="29.6" x2="40" y2="29.6"/>
+  </g>
+
+  <!-- image band: the Instagram glyph, centred on 20 -->
+  <g transform="translate(10.98 10.98) scale(0.752)" fill="none" stroke="#ffffff" stroke-width="1.8"
+     stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="5"/>
+    <circle cx="12" cy="12" r="4"/>
+    <circle cx="17.5" cy="6.5" r="1.25" fill="#ffffff" stroke="none"/>
+  </g>
+
+  <!-- action band -->
+  <g fill="none" stroke="#ffffff" stroke-width="0.66" stroke-linejoin="miter" stroke-miterlimit="8" stroke-linecap="round" opacity="0.92">
+    <path d="M5.53 37 C3.96 35.59 3 34.45 3 33.83 A1.37 1.37 0 0 1 5.53 33.17 A1.37 1.37 0 0 1 8.06 33.83 C8.06 34.45 7.1 35.59 5.53 37 Z"/>
+    <path d="M13.76 36.62 A2.13 2.13 0 1 1 14.29 36.23 L14.44 37 Z"/>
+  </g>
+</svg>

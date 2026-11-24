@@ -44,12 +44,18 @@ head = f"""<!doctype html>
 """
 (ROOT / "index.html").write_text(head + page.replace("<style>", "<style>", 1).replace("\n<header", "</head>\n<body>\n<header", 1) + "\n</body>\n</html>\n", encoding="utf-8")
 
+import cases  # noqa: E402  (case study pages, cas/<slug>.html)
+slugs = cases.build()
+
 (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {URL}sitemap.xml\n", encoding="utf-8")
+today = date.today().isoformat()
+urls = [URL] + [f"{URL}cas/{s}.html" for s in slugs]
 (ROOT / "sitemap.xml").write_text(
     '<?xml version="1.0" encoding="UTF-8"?>\n'
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-    f"  <url><loc>{URL}</loc><lastmod>{date.today().isoformat()}</lastmod></url>\n"
-    "</urlset>\n", encoding="utf-8")
+    + "".join(f"  <url><loc>{u}</loc><lastmod>{today}</lastmod></url>\n" for u in urls)
+    + "</urlset>\n", encoding="utf-8")
+print("case pages:", ", ".join(slugs))
 
 # Social preview: a screenshot of the live hero (img/og-base.jpg, 1200x630) when present,
 # otherwise the hero poster with the centered logo drawn on top.
