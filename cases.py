@@ -389,7 +389,7 @@ def page(c):
     <div class="hero-shade"></div>
     <div class="hero-in">
       <h1>Une tâche comme celle‑ci dans votre équipe&nbsp;?</h1>
-      <a class="btn btn-glass" href="#contact">Réserver un appel de 15&nbsp;min</a>
+      <a class="btn btn-glass" href="https://calendly.com/marindv-pro/appel-decouverte" target="_blank" rel="noopener">Réserver un appel de 15&nbsp;min</a>
     </div>
   </section>
   <section class="c-wrap c-others">
