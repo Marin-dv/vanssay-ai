@@ -1,31 +1,31 @@
 """Case study pages for ai.vanssay.net (French). Real content only.
 
 Run through build.py (or directly: python cases.py). Writes cas/<slug>.html.
+The pages reuse the home page's own style, header, footer and scripts (read from page.html),
+so they always look like the home page. The call-to-action band uses the hero's live canvas.
 Support conversations are real, translated from English, with names, sites and accounts removed.
+Thumbnails are existing assets only (product icons, crops of existing visuals), never drawn icons.
 """
 import html
 import pathlib
+import re
 
 ROOT = pathlib.Path(__file__).resolve().parent
 OUT = ROOT / "cas"
 SITE = "https://ai.vanssay.net/"
-BOOK = "../#contact"
 
-ICONS = {
-    "mail": '<path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/>',
-    "layers": '<path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/>',
-    "rocket": '<path d="M12 3c3 2.2 5 6 5 10l-2 3H9l-2-3c0-4 2-7.8 5-10z"/><circle cx="12" cy="10" r="1.7"/><path d="m9.5 16-1.5 4M14.5 16l1.5 4"/>',
-    "receipt": '<path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/>',
-    "doc": '<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M10 12h5M10 16h5"/>',
-    "shop": '<path d="M4 9 6 4h12l2 5"/><path d="M4 9h16v11H4z"/><path d="M9 20v-6h6v6"/>',
+THUMBS = {
+    "mail": "ic-support.png",      # Reviews app icon with the Vanssay badge (a message bubble)
+    "shop": "lt-shop.webp",        # Le Typographe's shop (their Instagram photo)
+    "layers": "ic-vanssay.png",    # Vanssay glyph (the company's own memory)
+    "rocket": "ic-2027.png",       # Google Reviews 2027 app icon
+    "receipt": "ic-billing.png",   # the real subscription email's button
+    "doc": "ic-cfe.png",           # CFE cartouche from the blank tax form
 }
-COLORS = {"mail": "#2b50ff", "layers": "#7c5cff", "rocket": "#ff7a45", "receipt": "#19c3b1", "doc": "#ff4f9a", "shop": "#0e7afe"}
 
 
-def icon(name, size=40):
-    return (f'<span class="ic" style="background:{COLORS[name]};width:{size}px;height:{size}px">'
-            f'<svg viewBox="0 0 24 24" width="{int(size*.5)}" height="{int(size*.5)}" fill="none" stroke="#fff" '
-            f'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{ICONS[name]}</svg></span>')
+def thumb(name, cls="av"):
+    return f'<img class="{cls}" src="../img/{THUMBS[name]}" alt="">'
 
 
 NB = " "
@@ -43,77 +43,81 @@ def esc(s):
     return html.escape(typo(s), quote=True)
 
 
-CSS = """
-:root { --black:#000; --ink:#101214; --white:#fff; --g1:#f5f5f7; --g2:#ebebed; --g3:#ceced0; --mute:#86868b; --green:#9dff5e;
-  --font:"SF Pro Display",-apple-system,BlinkMacSystemFont,"Inter Tight","Inter","Segoe UI",Roboto,sans-serif;
-  --pad:max(20px,env(safe-area-inset-left,0px)); --pad-r:max(20px,env(safe-area-inset-right,0px)); color-scheme:light; }
-* { box-sizing:border-box; }
-:root { padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px); }
-body { margin:0; background:var(--white); color:var(--black); font:500 15px/1.5 var(--font); letter-spacing:-.01em; -webkit-font-smoothing:antialiased; }
-a { color:inherit; text-decoration:none; }
-img, video { display:block; max-width:100%; height:auto; }
-h1, h2, h3, p { margin:0; font-weight:500; }
-ul, ol { margin:0; padding:0; list-style:none; }
-a:focus-visible { outline:2px solid var(--black); outline-offset:3px; border-radius:8px; }
-.nav { position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:rgba(16,18,20,.88); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); color:var(--white); }
-body::before { content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); background:var(--ink); z-index:6; }
-.nav-in { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px var(--pad-r) 12px var(--pad); font-size:14px; }
-.nav-in .back { opacity:.75; } .nav-in .back:hover { opacity:1; }
-.btn { display:inline-flex; align-items:center; justify-content:center; padding:11px 16px; border-radius:8px; font:600 13px/1 var(--font); }
-.btn-dark { background:var(--black); color:var(--white); } .btn-dark:hover { background:#2a2a2d; }
-.btn-glass { background:rgba(255,255,255,.16); color:var(--white); } .btn-glass:hover { background:rgba(255,255,255,.26); }
-.wrap { max-width:1050px; margin:0 auto; padding-left:var(--pad); padding-right:var(--pad-r); }
-.head { padding-block:clamp(56px,8vw,110px) clamp(32px,5vw,56px); display:grid; gap:20px; }
-.kicker { display:flex; align-items:center; gap:12px; font-size:13px; color:var(--mute); }
-.ic { display:inline-grid; place-items:center; border-radius:10px; flex:none; }
-.head h1 { font-size:clamp(34px,4.6vw,60px); line-height:1.02; letter-spacing:-.035em; text-wrap:balance; max-width:15em; }
-.head .lede { font-size:clamp(18px,1.8vw,22px); line-height:1.35; letter-spacing:-.02em; color:#4a4a4f; max-width:36em; }
-.meta { display:flex; flex-wrap:wrap; gap:10px 28px; padding-top:8px; border-top:1px solid var(--g2); font-size:14px; }
-.meta div { display:grid; gap:2px; padding-top:12px; } .meta span { font-size:12px; color:var(--mute); }
-.cover { border-radius:12px; overflow:hidden; background:var(--g1); margin-bottom:clamp(40px,6vw,72px); }
-.cover img, .cover video { width:100%; aspect-ratio:16/8; object-fit:cover; }
-.gallery { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:clamp(40px,6vw,72px); }
-.gallery img { border-radius:12px; aspect-ratio:1; object-fit:cover; width:100%; }
-section.block { display:grid; grid-template-columns:1fr 2fr; gap:clamp(20px,5vw,80px); padding-block:clamp(36px,5vw,64px); border-top:1px solid var(--g2); }
-section.block > h2 { font-size:13px; color:var(--mute); letter-spacing:0; }
-.prose { display:grid; gap:16px; font-size:clamp(18px,1.6vw,21px); line-height:1.42; letter-spacing:-.02em; }
-.prose p.small { font-size:15px; color:var(--mute); letter-spacing:-.01em; }
-.steps { display:grid; gap:0; counter-reset:s; }
-.steps li { display:grid; grid-template-columns:36px 1fr; gap:12px; padding:14px 0; border-top:1px solid var(--g2); counter-increment:s; font-size:17px; line-height:1.4; }
-.steps li:first-child { border-top:0; padding-top:0; }
-.steps li::before { content:counter(s); font-size:13px; color:var(--mute); padding-top:3px; }
-.steps b { font-weight:600; }
-.facts { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-.fact { background:var(--g1); border-radius:12px; padding:20px; display:grid; gap:6px; }
-.fact b { font-size:clamp(28px,3vw,40px); font-weight:500; letter-spacing:-.035em; line-height:1; }
-.fact span { font-size:13px; color:#6e6e73; }
-.notes li { padding:12px 16px; background:var(--g1); border-radius:10px; font-size:15px; margin-bottom:8px; }
-.notes li span { color:var(--mute); }
-.conv { display:grid; gap:12px; margin-bottom:28px; }
-.conv h3 { font-size:22px; letter-spacing:-.025em; margin-bottom:4px; }
-.msg { border-radius:14px; padding:16px 18px; display:grid; gap:8px; font-size:16px; line-height:1.45; max-width:44em; }
-.msg .who { font-size:12px; color:var(--mute); display:flex; gap:8px; align-items:center; }
-.msg.in { background:var(--g1); }
-.msg.out { background:var(--ink); color:var(--white); margin-left:auto; }
-.msg.out .who { color:#a1a1a6; }
-.msg.thanks { background:#eef9e6; max-width:30em; }
-.work { border:1px dashed var(--g3); border-radius:14px; padding:16px 18px; display:grid; gap:10px; }
-.work .who { font-size:12px; color:var(--mute); }
-.work li { display:grid; grid-template-columns:18px 1fr; gap:10px; font-size:15px; line-height:1.4; }
-.work li::before { content:""; width:8px; height:8px; border-radius:50%; background:#2b50ff; margin-top:7px; }
-.timing { font-size:13px; color:var(--mute); }
-.cta { background:var(--ink); color:var(--white); margin-top:clamp(40px,6vw,80px); }
-.cta-in { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:20px; padding-block:clamp(48px,7vw,90px); }
-.cta h2 { font-size:clamp(26px,3vw,40px); letter-spacing:-.03em; line-height:1.08; max-width:18em; }
-.more { padding-block:clamp(40px,6vw,72px); }
-.more h2 { font-size:24px; letter-spacing:-.025em; margin-bottom:18px; }
-.more-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:10px; }
-.more-grid a { display:flex; align-items:center; gap:12px; background:var(--g1); border-radius:12px; padding:14px 16px; }
-.more-grid a:hover { background:var(--g2); }
-.more-grid b { font-weight:500; display:block; } .more-grid span span { font-size:13px; color:var(--mute); }
-footer { padding:28px var(--pad-r) 28px var(--pad); font-size:13px; color:var(--mute); display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 24px; }
-@media (max-width:760px) { section.block { grid-template-columns:1fr; } .facts, .gallery { grid-template-columns:1fr 1fr; } }
-@media (max-width:480px) { .facts, .gallery { grid-template-columns:1fr; } }
+# ---------------------------------------------------------------- pieces of the home page
+HOME = (ROOT / "page.html").read_text(encoding="utf-8")
+HOME_STYLE = re.search(r"<style>(.*?)</style>", HOME, re.S).group(1)
+HOME_FONTS = "\n".join(l for l in HOME.splitlines() if "fonts.g" in l)
+HOME_TOP = re.search(r'(<header class="nav".*?</aside>)', HOME, re.S).group(1)
+HOME_FOOTER = re.search(r'(<footer id="contact">.*?</footer>)', HOME, re.S).group(1)
+HOME_SCRIPT = re.search(r"(<script>.*?</script>)", HOME, re.S).group(1)
+
+
+def relink(s):
+    """Home page links and assets, seen from cas/<slug>.html."""
+    s = s.replace('href="#top"', 'href="../"')
+    for a in ("travaux", "services", "tarifs"):
+        s = s.replace(f'href="#{a}"', f'href="../#{a}"')
+    s = s.replace('href="cas/', 'href="')
+    s = s.replace('src="img/', 'src="../img/')
+    return s
+
+
+CASE_CSS = """
+.case .nav { background: rgba(16, 18, 20, .72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.c-wrap { max-width: 1050px; margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad-r); }
+.c-head { padding-top: clamp(110px, 13vw, 170px); padding-bottom: clamp(40px, 5vw, 64px); display: grid; gap: 22px; }
+.c-kicker { display: flex; align-items: center; gap: 12px; }
+.c-kicker .av { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; }
+.c-head h1 { font-size: clamp(34px, 3.6vw, 52px); line-height: 1.04; letter-spacing: -.03em; max-width: 15em; text-wrap: balance; }
+.c-lede { font-size: clamp(22px, 2.1vw, 30px); line-height: 1.22; letter-spacing: -.025em; color: #3a3a3c; max-width: 30em; }
+.c-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.c-meta div { background: var(--g1); border-radius: 10px; padding: 10px 14px; display: grid; gap: 2px; font-size: 14px; }
+.c-meta span { font-size: 12px; color: var(--mute); }
+.c-media { margin-bottom: clamp(48px, 7vw, 96px); }
+.c-media .cover { border-radius: 12px; overflow: hidden; background: var(--ink); }
+.c-media .cover video, .c-media .cover img { width: 100%; aspect-ratio: 16 / 8; object-fit: cover; }
+.c-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.c-gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; }
+.c-block { display: grid; grid-template-columns: 1fr 2fr; gap: clamp(24px, 6vw, 110px); padding-bottom: clamp(48px, 7vw, 96px); }
+.c-block > div { display: grid; gap: 8px; min-width: 0; align-content: start; }
+.c-steps { display: grid; gap: 8px; counter-reset: s; }
+.c-steps li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; background: var(--g1); border-radius: 12px; padding: 15px 16px; font-size: 16px; line-height: 1.42; counter-increment: s; }
+.c-steps li::before { content: counter(s); color: var(--mute); font-size: 14px; }
+.c-steps b { font-weight: 600; }
+.c-prose { display: grid; gap: 14px; }
+.c-prose p { font-size: clamp(20px, 1.9vw, 26px); line-height: 1.25; letter-spacing: -.025em; }
+.c-prose p.small { font-size: 15px; color: var(--mute); letter-spacing: -.01em; }
+.c-notes { display: grid; gap: 8px; }
+.c-notes li { background: var(--g1); border-radius: 12px; padding: 15px 16px; display: grid; gap: 2px; }
+.c-notes li span { color: var(--mute); font-size: 15px; }
+.c-conv { display: grid; gap: 8px; margin-bottom: 40px; }
+.c-conv h3 { font-size: 24px; letter-spacing: -.025em; margin-bottom: 6px; }
+.c-msg { border-radius: 12px; padding: 16px 18px; display: grid; gap: 8px; font-size: 17px; line-height: 1.42; letter-spacing: -.015em; }
+.c-msg .who { font-size: 12px; color: var(--mute); letter-spacing: 0; }
+.c-msg.in { background: var(--g1); }
+.c-msg.out { background: var(--black); color: var(--white); }
+.c-msg.out .who { color: #a1a1a6; }
+.c-work { background: var(--g2); border-radius: 12px; padding: 16px 18px; display: grid; gap: 10px; }
+.c-work .who { font-size: 12px; color: var(--mute); }
+.c-work ul { display: grid; gap: 6px; }
+.c-work li { display: flex; gap: 10px; align-items: baseline; font-size: 15px; line-height: 1.4; color: #3a3a3c; }
+.c-work li::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: #8e8e93; flex: none; transform: translateY(-2px); }
+.c-msg.thanks { background: var(--g1); max-width: 34em; }
+.c-timing { font-size: 13px; color: var(--mute); }
+.c-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.c-fact { background: var(--g1); border-radius: 12px; padding: 20px; display: grid; gap: 10px; align-content: start; }
+.c-fact b { font-size: clamp(38px, 3.2vw, 48px); font-weight: 500; letter-spacing: -.035em; line-height: 1; font-variant-numeric: tabular-nums; }
+.c-fact span { font-size: 14px; color: #6e6e73; }
+.hero.c-cta { height: clamp(380px, 46vw, 520px); min-height: 0; }
+.hero.c-cta h1 { max-width: 20em; }
+.c-others { padding-block: clamp(56px, 8vw, 110px); }
+.c-others-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.c-other { display: grid; grid-template-columns: 40px 1fr 30px; align-items: center; gap: 12px; background: var(--g1); border-radius: 12px; padding: 15px 16px; }
+.c-other:hover { background: var(--g2); }
+.c-other .av { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; }
+.c-other .go { justify-self: end; width: 30px; height: 30px; border-radius: 50%; background: var(--white); display: grid; place-items: center; font-size: 15px; color: #6e6e73; }
+@media (max-width: 760px) { .c-block { grid-template-columns: 1fr; } .c-facts, .c-gallery { grid-template-columns: 1fr 1fr; } .c-others-grid { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .c-facts, .c-gallery { grid-template-columns: 1fr; } }
 """
 
 CASES = []
@@ -299,23 +303,23 @@ case(
 
 def render_block(title, kind, items):
     if kind == "steps":
-        inner = '<ol class="steps">' + "".join(f"<li><div>{typo(i)}</div></li>" for i in items) + "</ol>"
+        inner = '<ol class="c-steps">' + "".join(f"<li><div>{typo(i)}</div></li>" for i in items) + "</ol>"
     elif kind == "notes":
-        inner = '<ul class="notes">' + "".join(f"<li>{esc(a)} <span>· {esc(b)}</span></li>" for a, b in items) + "</ul>"
+        inner = '<ul class="c-notes">' + "".join(f"<li><b>{esc(a)}</b><span>{esc(b)}</span></li>" for a, b in items) + "</ul>"
     else:
-        inner = '<div class="prose">' + "".join(typo(i) if i.startswith("<p") else f"<p>{typo(i)}</p>" for i in items) + "</div>"
-    return f'<section class="block wrap"><h2>{esc(title)}</h2>{inner}</section>'
+        inner = '<div class="c-prose">' + "".join(typo(i) if i.startswith("<p") else f"<p>{typo(i)}</p>" for i in items) + "</div>"
+    return f'<section class="c-wrap c-block"><p class="label">{esc(title)}</p><div>{inner}</div></section>'
 
 
 def render_conv(c):
-    work = "".join(f"<li><div>{esc(w)}</div></li>" for w in c["work"])
-    timing = f'<p class="timing">{esc(c["timing"])}</p>' if c.get("timing") else ""
-    return f"""<div class="conv">
+    work = "".join(f"<li>{esc(w)}</li>" for w in c["work"])
+    timing = f'<p class="c-timing">{esc(c["timing"])}</p>' if c.get("timing") else ""
+    return f"""<div class="c-conv">
   <h3>{esc(c['title'])}</h3>
-  <div class="msg in"><span class="who">Le client</span><p>{esc(c['client'])}</p></div>
-  <div class="work"><span class="who">Ce que l'IA a vérifié et fait avant de répondre</span><ul>{work}</ul></div>
-  <div class="msg out"><span class="who">Réponse, relue par moi puis envoyée</span><p>{esc(c['reply'])}</p></div>
-  <div class="msg thanks"><span class="who">Le client</span><p>{esc(c['thanks'])}</p></div>
+  <div class="c-msg in"><span class="who">Le client</span><p>{esc(c['client'])}</p></div>
+  <div class="c-work"><span class="who">Ce que l'IA a vérifié et fait avant de répondre</span><ul>{work}</ul></div>
+  <div class="c-msg out"><span class="who">Réponse, relue par moi puis envoyée</span><p>{esc(c['reply'])}</p></div>
+  <div class="c-msg thanks"><span class="who">Le client</span><p>{esc(c['thanks'])}</p></div>
   {timing}
 </div>"""
 
@@ -325,56 +329,70 @@ def page(c):
     media = ""
     if c.get("cover_video"):
         src, poster = c["cover_video"]
-        media = f'<div class="wrap"><div class="cover"><video autoplay muted loop playsinline poster="{poster}"><source src="{src}" type="video/mp4"></video></div></div>'
+        media = f'<div class="c-wrap c-media"><div class="cover"><video autoplay muted loop playsinline poster="{poster}"><source src="{src}" type="video/mp4"></video></div></div>'
     if c.get("gallery"):
-        media = '<div class="wrap"><div class="gallery">' + "".join(f'<img src="{g}" alt="" loading="lazy">' for g in c["gallery"]) + "</div></div>"
+        media = '<div class="c-wrap c-media"><div class="c-gallery">' + "".join(f'<img src="{g}" alt="" loading="lazy">' for g in c["gallery"]) + "</div></div>"
     body = "".join(render_block(*b) for b in c.get("blocks", []))
     if c.get("conversations"):
         convs = "".join(render_conv(x) for x in c["conversations"])
-        body += f'<section class="block wrap"><h2>Deux vrais échanges</h2><div>{convs}<p class="timing">{esc(c["conv_note"])}</p></div></section>'
+        body += f'<section class="c-wrap c-block"><p class="label">Deux vrais échanges</p><div>{convs}<p class="c-timing">{esc(c["conv_note"])}</p></div></section>'
     if c.get("facts"):
-        facts = "".join(f'<div class="fact"><b>{esc(a)}</b><span>{esc(b)}</span></div>' for a, b in c["facts"])
-        body += f'<section class="block wrap"><h2>En chiffres</h2><div class="facts">{facts}</div></section>'
+        facts = "".join(f'<div class="c-fact"><b>{esc(a)}</b><span>{esc(b)}</span></div>' for a, b in c["facts"])
+        body += f'<section class="c-wrap c-block"><p class="label">En chiffres</p><div class="c-facts">{facts}</div></section>'
     body += "".join(render_block(*b) for b in c.get("after", []))
     others = "".join(
-        f'<a href="{o["slug"]}.html">{icon(o["icon"], 36)}<span><b>{esc(o["short"])}</b><span>{esc(o["sub"])}</span></span></a>'
+        f'<a class="c-other" href="{o["slug"]}.html">{thumb(o["icon"])}<span class="who"><b>{esc(o["short"])}</b><span>{esc(o["sub"])}</span></span><span class="go" aria-hidden="true">→</span></a>'
         for o in CASES if o["slug"] != c["slug"])
     title = f"{c['short']} · Étude de cas · Marin de Vanssay"
-    desc = c["lede"]
+    desc = typo(c["lede"])
     return f"""<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{esc(title)}</title>
-<meta name="description" content="{esc(desc)}">
+<meta name="description" content="{html.escape(desc, quote=True)}">
 <link rel="canonical" href="{SITE}cas/{c['slug']}.html">
 <link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+<link rel="apple-touch-icon" href="/favicon-180.png">
 <meta property="og:type" content="article">
+<meta property="og:url" content="{SITE}cas/{c['slug']}.html">
 <meta property="og:title" content="{esc(c['title'])}">
-<meta property="og:description" content="{esc(desc)}">
+<meta property="og:description" content="{html.escape(desc, quote=True)}">
 <meta property="og:image" content="{SITE}img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap">
-<style>{CSS}</style>
+<style>:root{{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}}[hidden]{{display:none!important}}</style>
+{HOME_FONTS}
+<style>{HOME_STYLE}{CASE_CSS}</style>
 </head>
-<body>
-<header class="nav"><div class="nav-in"><a class="back" href="../#travaux">← Marin de Vanssay</a><a class="btn btn-glass" href="{BOOK}">Réserver un appel</a></div></header>
+<body class="case">
+{relink(HOME_TOP)}
 <main>
-  <div class="wrap head">
-    <p class="kicker">{icon(c['icon'])}Étude de cas</p>
+  <section class="c-wrap c-head" id="top">
+    <p class="c-kicker">{thumb(c['icon'])}<span class="label">Étude de cas</span></p>
     <h1>{esc(c['title'])}</h1>
-    <p class="lede">{esc(c['lede'])}</p>
-    <div class="meta">{meta}</div>
-  </div>
+    <p class="c-lede">{esc(c['lede'])}</p>
+    <div class="c-meta">{meta}</div>
+  </section>
   {media}
   {body}
-  <section class="cta"><div class="wrap cta-in"><h2>Une tâche comme celle-ci dans votre équipe&nbsp;?</h2><a class="btn btn-glass" href="{BOOK}">Réserver un appel de 15&nbsp;min</a></div></section>
-  <section class="wrap more"><h2>Autres études de cas</h2><div class="more-grid">{others}</div></section>
+  <section class="hero c-cta" aria-label="Réserver un appel">
+    <canvas class="hero-media" id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero-grain" aria-hidden="true"></div>
+    <div class="hero-shade"></div>
+    <div class="hero-in">
+      <h1>Une tâche comme celle‑ci dans votre équipe&nbsp;?</h1>
+      <a class="btn btn-glass" href="#contact">Réserver un appel de 15&nbsp;min</a>
+    </div>
+  </section>
+  <section class="c-wrap c-others">
+    <div class="row-head"><h2>Autres études de cas</h2><p><a href="../#cas">Tous les cas concrets</a></p></div>
+    <div class="c-others-grid">{others}</div>
+  </section>
 </main>
-<footer><span>Vanssay · Marin de Vanssay © 2026</span><a href="../">ai.vanssay.net</a></footer>
+{relink(HOME_FOOTER)}
+{HOME_SCRIPT}
 </body>
 </html>
 """
