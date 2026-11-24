@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Marin de Vanssay · Formation et automatisations IA pour les PME</title>
+<meta name="description" content="J’apprends à votre équipe à se servir de l’IA sur ses vraies tâches, puis je construis ce qui manque pour que tout tourne dans vos outils.">
+<link rel="canonical" href="https://ai.vanssay.net/">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+<link rel="apple-touch-icon" href="/favicon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ai.vanssay.net/">
+<meta property="og:title" content="Marin de Vanssay · Formation et automatisations IA pour les PME">
+<meta property="og:description" content="J’apprends à votre équipe à se servir de l’IA sur ses vraies tâches, puis je construis ce qui manque pour que tout tourne dans vos outils.">
+<meta property="og:image" content="https://ai.vanssay.net/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap">
+<style>
+/* Layout: Haptic's structure, element for element. Full-bleed video hero, floating notification cards, logo marquee,
+   two-column intro, work grid, services list, accordion, three pricing cards (two light, one black), giant footer wordmark. */
+:root {
+  --black: #000000;
+  --ink: #101214;
+  --white: #ffffff;
+  --g1: #f5f5f7;
+  --g2: #ebebed;
+  --g3: #ceced0;
+  --mute: #86868b;
+  --green: #9dff5e;
+  --font: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Inter Tight", "Inter", "Segoe UI", Roboto, sans-serif;
+  --pad: max(20px, env(safe-area-inset-left, 0px));
+  --pad-r: max(20px, env(safe-area-inset-right, 0px));
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0; background: var(--white); color: var(--black);
+  font: 500 15px/1.4 var(--font); letter-spacing: -.01em;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; z-index: 30;
+  height: env(safe-area-inset-top, 0px); background: var(--ink);
+}
+a { color: inherit; text-decoration: none; }
+img, video { display: block; max-width: 100%; height: auto; }
+h1, h2, h3, p { margin: 0; font-weight: 500; }
+ul { margin: 0; padding: 0; list-style: none; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--black); outline-offset: 3px; border-radius: 8px; }
+.label { font-size: 13px; color: var(--mute); letter-spacing: 0; }
+
+/* Header */
+.nav {
+  position: fixed; top: env(safe-area-inset-top, 0px); left: 0; right: 0; z-index: 20;
+  color: var(--white); transition: background .3s ease;
+}
+.nav.solid { background: rgba(16, 18, 20, .72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.nav-in { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding: 12px var(--pad-r) 12px var(--pad); font-size: 14px; }
+.brand { font-weight: 500; }
+.links { display: flex; gap: 18px; }
+.links a:hover { opacity: .7; }
+.clock { justify-self: end; display: flex; gap: 6px; font-variant-numeric: tabular-nums; }
+.clock span { opacity: .75; }
+@media (max-width: 640px) { .links { display: none; } .nav-in { grid-template-columns: 1fr auto; } }
+
+/* Floating notification cards */
+.notes {
+  position: fixed; z-index: 21; top: calc(env(safe-area-inset-top, 0px) + 54px); right: var(--pad-r);
+  display: grid; gap: 10px; width: min(360px, calc(100vw - 40px));
+}
+.note {
+  display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: 12px;
+  padding: 12px 14px; border-radius: 14px;
+  background: rgba(236, 236, 238, .86); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, .10); color: var(--black);
+  transition: opacity .35s ease, transform .35s ease;
+}
+.note:hover .chip { background: #c9c9cd; }
+.note.gone { opacity: 0; transform: translateY(-8px); pointer-events: none; }
+.ni { width: 40px; height: 40px; border-radius: 10px; overflow: hidden; background: var(--black); display: grid; place-items: center; }
+.ni img { width: 100%; height: 100%; object-fit: cover; }
+.ni.glyph img { width: 58%; height: 58%; object-fit: contain; }
+.nt { display: grid; min-width: 0; line-height: 1.25; }
+.nt b { font-weight: 600; font-size: 14px; }
+.nt span { font-size: 13px; color: #6e6e73; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chip { font-size: 11px; font-weight: 600; letter-spacing: .02em; padding: 4px 7px; border-radius: 5px; background: #d8d8dc; }
+@media (max-width: 700px) { .notes { display: none; } }
+
+/* Hero */
+.hero { position: relative; height: min(100svh, 980px); min-height: 560px; overflow: hidden; background: var(--ink); color: var(--white); }
+.hero-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero-shade { position: absolute; inset: 0; background:
+  radial-gradient(ellipse 42% 30% at 50% 47%, rgba(0,0,0,.16), transparent 70%),
+  linear-gradient(180deg, rgba(0,0,0,.28) 0%, transparent 22%, transparent 58%, rgba(0,0,0,.5) 100%); }
+.hero-logo { position: absolute; left: 50%; top: 47%; transform: translate(-50%, -50%); display: flex; align-items: center; gap: clamp(12px, 1.5vw, 24px); color: var(--white); pointer-events: none; text-shadow: 0 2px 30px rgba(0, 0, 0, .35); }
+.hero-logo img { width: clamp(44px, 5.1vw, 92px); height: auto; filter: drop-shadow(0 2px 18px rgba(0, 0, 0, .35)); }
+.hero-logo span { font-size: clamp(52px, 6.4vw, 120px); font-weight: 500; letter-spacing: -.045em; line-height: 1; }
+.hero h1 { text-shadow: 0 1px 24px rgba(0, 0, 0, .35); }
+.hero-in { position: absolute; left: var(--pad); right: var(--pad-r); bottom: 34px; display: grid; gap: 22px; justify-items: start; }
+.hero h1 { font-size: clamp(34px, 3.4vw, 50px); line-height: 1.05; letter-spacing: -.025em; max-width: 13em; text-wrap: balance; }
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: 11px 16px; border-radius: 8px; font: 600 13px/1 var(--font); letter-spacing: -.005em; transition: background .2s ease; cursor: pointer; border: 0; }
+.btn-glass { background: rgba(255, 255, 255, .22); color: var(--white); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.btn-glass:hover { background: rgba(255, 255, 255, .32); }
+.btn-dark { background: var(--black); color: var(--white); }
+.btn-dark:hover { background: #2a2a2d; }
+.btn-grey { background: #3a3a3c; color: var(--white); }
+.btn-grey:hover { background: #4a4a4d; }
+
+/* Logo marquee */
+.logos { padding: 44px 0 30px; }
+.logos .label { padding-left: var(--pad); margin-bottom: 26px; }
+.marquee { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.track { display: flex; gap: 88px; width: max-content; animation: slide 38s linear infinite; padding-right: 88px; }
+.track span { font-size: 30px; font-weight: 600; letter-spacing: -.03em; color: #a1a1a6; white-space: nowrap; }
+@keyframes slide { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .track { animation: none; } .marquee { overflow-x: auto; } }
+
+/* Intro */
+.intro { padding: clamp(80px, 11vw, 150px) var(--pad-r) clamp(80px, 10vw, 140px) var(--pad); }
+.intro-in { max-width: 1050px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 8vw, 150px); align-items: start; }
+.intro-in > div { display: grid; gap: 16px; min-width: 0; }
+.reveal { font-size: clamp(24px, 2.3vw, 32px); line-height: 1.2; letter-spacing: -.025em; color: var(--black); }
+.reveal .w { color: var(--g3); transition: color .25s ease; }
+.reveal .w.on { color: var(--black); }
+@media (prefers-reduced-motion: reduce) { .reveal .w { color: var(--black); transition: none; } }
+.media-card { position: relative; display: block; border-radius: 12px; overflow: hidden; background: var(--ink); }
+.media-card > img { width: 100%; aspect-ratio: 4 / 4.4; object-fit: cover; }
+.mc-foot { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px; padding: 40px 16px 16px; color: var(--white); background: linear-gradient(transparent, rgba(0,0,0,.65)); }
+.mc-ic { width: 36px; height: 36px; border-radius: 9px; object-fit: cover; background: var(--black); }
+.mc-ic.glyph { object-fit: contain; padding: 8px; }
+.mc-foot b { display: block; font-weight: 600; font-size: 14px; }
+.mc-foot span span { font-size: 13px; opacity: .7; }
+@media (max-width: 760px) { .intro-in { grid-template-columns: 1fr; } }
+
+/* Section head row */
+.row-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+.row-head h2 { font-size: 24px; letter-spacing: -.025em; }
+.row-head p { font-size: 14px; color: var(--mute); }
+.row-head p a { color: var(--black); }
+.row-head p a:hover { opacity: .6; }
+
+/* Work grid */
+.work { padding: 0 var(--pad-r) clamp(80px, 10vw, 140px) var(--pad); }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.wcard { display: flex; flex-direction: column; border-radius: 10px; overflow: hidden; background: var(--ink); color: var(--white); min-width: 0; position: relative; }
+.wcard > img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform .6s ease; }
+.wcard:hover > img { transform: scale(1.02); }
+.wcard.wide { grid-column: span 2; }
+.wcard.wide > img, .wmedia { width: 100%; aspect-ratio: 8 / 3; object-fit: cover; object-position: 50% 85%; }
+.wfoot { display: flex; align-items: center; gap: 12px; padding: 16px; }
+.wfoot b { display: block; font-weight: 600; font-size: 15px; }
+.wfoot span span { font-size: 15px; color: rgba(255, 255, 255, .6); }
+.wicon { flex: none; width: 40px; height: 40px; border-radius: 9px; overflow: hidden; background: var(--black); display: grid; place-items: center; box-shadow: 0 0 0 1px rgba(255,255,255,.08); }
+.wicon img { width: 100%; height: 100%; object-fit: cover; }
+.wicon.glyph img { width: 56%; height: 56%; object-fit: contain; }
+.soon { position: absolute; top: 14px; right: 14px; font-size: 11px; font-weight: 600; letter-spacing: .03em; padding: 4px 7px; border-radius: 5px; background: rgba(60, 60, 64, .55); color: rgba(255, 255, 255, .8); backdrop-filter: blur(6px); }
+@media (prefers-reduced-motion: reduce) { .wcard > img { transition: none; } .wcard:hover > img { transform: none; } }
+@media (max-width: 960px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 960px) { .wmedia { aspect-ratio: 16 / 9; } }
+@media (max-width: 600px) { .grid { grid-template-columns: 1fr; } .wcard.wide { grid-column: auto; } }
+
+/* Services */
+.services { padding: 0 var(--pad-r) clamp(80px, 11vw, 160px) var(--pad); }
+.services-in { max-width: 1050px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(32px, 7vw, 120px); align-items: center; }
+.services-in > div { display: grid; gap: 18px; min-width: 0; }
+.svc li { font-size: clamp(28px, 3vw, 44px); line-height: 1.12; letter-spacing: -.03em; white-space: nowrap; }
+@media (max-width: 420px) { .svc li { white-space: normal; } }
+@media (max-width: 760px) { .services-in { grid-template-columns: 1fr; } }
+
+/* Accordion (Haptic's testimonial list) */
+.cases { padding: 0 var(--pad-r) clamp(80px, 11vw, 160px) var(--pad); }
+.acc { max-width: 542px; margin: 0 auto; display: grid; gap: 8px; }
+.acc .label { margin-bottom: 8px; }
+.acc details { background: var(--g1); border-radius: 12px; }
+.acc summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; gap: 12px; padding: 15px 16px; }
+.acc summary::-webkit-details-marker { display: none; }
+.av { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; }
+.who { display: grid; line-height: 1.25; min-width: 0; }
+.who b { font-weight: 500; font-size: 15px; }
+.who span { font-size: 15px; color: var(--mute); }
+.co { width: 40px; height: 40px; border-radius: 9px; background: var(--black); display: grid; place-items: center; overflow: hidden; }
+.co img { width: 100%; height: 100%; object-fit: cover; }
+.co.glyph img { width: 56%; height: 56%; object-fit: contain; }
+.acc details p { padding: 34px 16px 18px; font-size: 18px; line-height: 1.42; letter-spacing: -.02em; }
+
+/* Pricing */
+.pricing { padding: 0 var(--pad-r) clamp(80px, 10vw, 140px) var(--pad); }
+.plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.plan { display: flex; flex-direction: column; border-radius: 12px; overflow: hidden; background: var(--g1); min-width: 0; }
+.plan-top { display: flex; flex-direction: column; gap: 22px; padding: 20px 20px 22px; flex: 1; }
+.plan-row { display: flex; justify-content: space-between; align-items: flex-start; }
+.pi { width: 40px; height: 40px; border-radius: 9px; background: var(--black); display: grid; place-items: center; }
+.pi img { width: 56%; height: 56%; object-fit: contain; }
+.badge { font-size: 11px; font-weight: 600; letter-spacing: .02em; padding: 4px 7px; border-radius: 5px; background: var(--g2); }
+.plan h3 { font-size: clamp(32px, 2.8vw, 42px); letter-spacing: -.03em; line-height: 1; }
+.plan .desc { font-size: 14px; line-height: 1.4; color: #6e6e73; max-width: 30em; }
+.price { margin-top: auto; padding-top: 40px; display: flex; align-items: baseline; gap: 6px; font-variant-numeric: tabular-nums; }
+.price b { font-size: clamp(38px, 3.2vw, 48px); font-weight: 500; letter-spacing: -.035em; line-height: 1; }
+.price sup { font-size: 14px; align-self: flex-start; margin-right: -3px; }
+.price small { font-size: 14px; color: #6e6e73; }
+.plan .btn { align-self: flex-start; }
+.plan-foot { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 18px; padding: 18px 20px 20px; background: var(--g2); font-size: 12px; color: #6e6e73; }
+.plan-foot li { display: flex; gap: 8px; align-items: baseline; }
+.plan-foot li::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: #b0b0b5; flex: none; transform: translateY(-2px); }
+.plan.dark { background: var(--black); color: var(--white); }
+.plan.dark .desc, .plan.dark .price small { color: #a1a1a6; }
+.plan.dark .pi { background: var(--green); }
+.plan.dark .badge { background: rgba(157, 255, 94, .14); color: var(--green); }
+.plan.dark .plan-foot { background: #111113; color: #8e8e93; }
+.plan.dark .plan-foot li::before { background: #4a4a4d; }
+@media (max-width: 960px) { .plans { grid-template-columns: 1fr; } }
+
+/* Footer */
+footer { border-top: 1px solid var(--g2); }
+.wordmark { padding: 24px var(--pad-r) 0 var(--pad); line-height: 1; overflow: hidden; }
+.wordmark span { display: inline-block; font-size: 200px; line-height: 1; padding-bottom: .06em; letter-spacing: -.06em; font-weight: 500; white-space: nowrap; transform-origin: left top; }
+.foot-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 32px; padding: 48px var(--pad-r) 0 var(--pad); }
+.foot-contact { display: grid; gap: 6px; max-width: 410px; }
+.foot-contact .fi { width: 40px; height: 40px; border-radius: 9px; background: var(--g1); display: grid; place-items: center; margin-bottom: 14px; }
+.foot-contact .fi img { width: 56%; height: 56%; object-fit: contain; }
+.foot-contact b { font-weight: 500; }
+.foot-contact p { color: var(--mute); }
+.field { margin-top: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 18px; border-radius: 10px; background: var(--g1); }
+.field span { color: #6e6e73; user-select: all; overflow-wrap: anywhere; }
+.field button { background: none; border: 0; padding: 0; font: 600 14px var(--font); color: var(--black); cursor: pointer; }
+.foot-col { display: grid; gap: 8px; align-content: start; }
+.foot-col b { font-weight: 500; margin-bottom: 6px; }
+.foot-col a { color: var(--mute); }
+.foot-col a:hover { color: var(--black); }
+.legal { padding: 64px var(--pad-r) 22px var(--pad); font-size: 13px; color: var(--mute); }
+@media (max-width: 760px) { .foot-grid { grid-template-columns: 1fr 1fr; } .foot-contact { grid-column: 1 / -1; } }
+
+/* Geometric band */
+.pattern { height: clamp(200px, 28vw, 420px); background: var(--black); position: relative; overflow: hidden; }
+.pattern i { position: absolute; top: 50%; border-radius: 50%; background: var(--g1); transform: translateY(-50%); }
+</style>
+</head>
+<body>
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top">Marin de Vanssay</a>
+    <nav class="links" aria-label="Sections">
+      <a href="#travaux">Travaux</a>
+      <a href="#services">Services</a>
+      <a href="#tarifs">Tarifs</a>
+    </nav>
+    <div class="clock"><span>Nantes</span><b id="clk">--:--:--</b></div>
+  </div>
+</header>
+
+<aside class="notes" aria-label="Raccourcis">
+  <a class="note" href="#contact">
+    <span class="ni glyph"><img src="img/glyph-white.png" alt=""></span>
+    <span class="nt"><b>Réserver un appel</b><span>Parlons de votre équipe</span></span>
+    <span class="chip">CONTACT</span>
+  </a>
+  <a class="note" id="note2" href="#cas">
+    <span class="ni"><img src="img/lt-logo.webp" alt=""></span>
+    <span class="nt"><b>Le Typographe</b><span>Nouvelle étude de cas</span></span>
+    <span class="chip">VOIR</span>
+  </a>
+</aside>
+
+<main>
+  <section class="hero" id="top">
+    <video class="hero-media" id="heroVideo" autoplay muted loop playsinline poster="img/hero-poster.webp" aria-hidden="true">
+      <source src="img/hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero-shade"></div>
+    <div class="hero-logo" aria-hidden="true"><img src="img/glyph-white.svg" alt=""><span>Vanssay</span></div>
+    <div class="hero-in">
+      <h1>Formation et automatisations IA pour les PME</h1>
+      <a class="btn btn-glass" href="#contact">Réserver un appel</a>
+    </div>
+  </section>
+
+  <section class="logos" aria-label="Outils">
+    <p class="label">Les outils avec lesquels je travaille</p>
+    <div class="marquee">
+      <div class="track">
+        <span>Claude</span><span>Gmail</span><span>Google Drive</span><span>Outlook</span><span>WordPress</span><span>Shopify</span><span>Wix</span><span>Webflow</span><span>Framer</span><span>Stripe</span><span>Notion</span>
+        <span aria-hidden="true">Claude</span><span aria-hidden="true">Gmail</span><span aria-hidden="true">Google Drive</span><span aria-hidden="true">Outlook</span><span aria-hidden="true">WordPress</span><span aria-hidden="true">Shopify</span><span aria-hidden="true">Wix</span><span aria-hidden="true">Webflow</span><span aria-hidden="true">Framer</span><span aria-hidden="true">Stripe</span><span aria-hidden="true">Notion</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro">
+    <div class="intro-in">
+      <div>
+        <p class="label">Introduction</p>
+        <p class="reveal">J’apprends à votre équipe à se servir de l’IA sur ses vraies tâches, puis je construis ce qui manque pour que tout tourne dans vos outils.</p>
+        <p class="reveal">J’enseigne depuis plus de quatre ans, et je fais tourner seul ma propre entreprise de logiciels avec l’IA.</p>
+      </div>
+      <div>
+        <p class="label">Étude de cas</p>
+        <a class="media-card" href="#cas">
+          <img src="img/lt-shop.webp" alt="L’intérieur de la papeterie Le Typographe" loading="lazy" width="1000" height="1250">
+          <span class="mc-foot"><img class="mc-ic" src="img/lt-logo.webp" alt=""><span><b>Le Typographe</b><span>Papeterie, Bruxelles</span></span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="work" id="travaux">
+    <div class="row-head">
+      <h2>Mes travaux</h2>
+      <p>Envie d’en voir plus&nbsp;? <a href="#contact">Réserver un appel</a></p>
+    </div>
+    <div class="grid">
+      <a class="wcard" href="#cas">
+        <img src="img/lt-notebooks.webp" alt="Carnets Hyper Chaud de Le Typographe" loading="lazy" width="1080" height="1080">
+        <span class="wfoot"><span class="wicon"><img src="img/lt-logo.webp" alt=""></span><span><b>Le Typographe</b><span>1&nbsp;765 fiches produits, mises à jour par l’IA</span></span></span>
+      </a>
+      <div class="wcard">
+        <img src="img/wix-aria.webp" alt="L’assistant IA de Wix répond avec les avis Google de Le Typographe" loading="lazy" width="1000" height="750">
+        <span class="wfoot"><span class="wicon"><img src="img/icon-wix.png" alt=""></span><span><b>Google Reviews 2027</b><span>L’assistant IA de Wix connaît vos avis</span></span></span>
+      </div>
+      <div class="wcard">
+        <span class="soon">BIENTÔT</span>
+        <img src="img/webflow-reviews-cover.webp" alt="Reviews pour Webflow" loading="lazy" width="900" height="595">
+        <span class="wfoot"><span class="wicon"><img src="img/icon-reviews.png" alt=""></span><span><b>Reviews pour Webflow</b><span>Vos avis Google sur Webflow</span></span></span>
+      </div>
+      <div class="wcard">
+        <img src="img/cover-reviews.webp" alt="Reviews pour Framer" loading="lazy" width="960" height="720">
+        <span class="wfoot"><span class="wicon"><img src="img/icon-reviews.png" alt=""></span><span><b>Reviews</b><span>Avis Google et Trustpilot sur Framer</span></span></span>
+      </div>
+      <div class="wcard">
+        <img src="img/cover-instagram.webp" alt="Instagram Feed" loading="lazy" width="960" height="720">
+        <span class="wfoot"><span class="wicon glyph"><img src="img/glyph-white.png" alt=""></span><span><b>Instagram Feed</b><span>Votre fil Instagram, à jour tout seul</span></span></span>
+      </div>
+      <div class="wcard">
+        <img src="img/cover-bouncer.webp" alt="Bouncer" loading="lazy" width="960" height="720">
+        <span class="wfoot"><span class="wicon glyph"><img src="img/glyph-white.png" alt=""></span><span><b>Bouncer</b><span>Bloquer des pays et les VPN</span></span></span>
+      </div>
+      <div class="wcard wide">
+        <video class="wmedia" autoplay muted loop playsinline poster="img/wix-promo-poster.jpg" aria-label="Extrait de la vidéo de présentation de Google Reviews 2027">
+          <source src="img/wix-promo.mp4" type="video/mp4">
+        </video>
+        <span class="wfoot"><span class="wicon"><img src="img/icon-wix.png" alt=""></span><span><b>Google Reviews 2027</b><span>Fiche, visuels et vidéo faits avec l’IA</span></span></span>
+      </div>
+      <div class="wcard">
+        <img src="img/cover-router.webp" alt="Router" loading="lazy" width="960" height="720">
+        <span class="wfoot"><span class="wicon glyph"><img src="img/glyph-white.png" alt=""></span><span><b>Router</b><span>La bonne page pour chaque visiteur</span></span></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="services-in">
+      <div class="media-card">
+        <img src="img/talk.webp" alt="Marin en train de présenter devant un écran" loading="lazy" width="900" height="1200">
+        <span class="mc-foot"><img class="mc-ic glyph" src="img/glyph-white.png" alt=""><span><b>Marin de Vanssay</b><span>Formateur et ingénieur</span></span></span>
+      </div>
+      <div>
+        <p class="label">Services</p>
+        <ul class="svc">
+          <li>Séances IA en équipe</li>
+          <li>Fichier de votre entreprise</li>
+          <li>Routines sur mesure</li>
+          <li>Automatisations</li>
+          <li>Logiciels sur mesure</li>
+          <li>Suivi mensuel</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="cases" id="cas">
+    <div class="acc">
+      <p class="label">Cas concrets</p>
+      <details open>
+        <summary><img class="av" src="img/lt-shop.webp" alt=""><span class="who"><b>Le Typographe</b><span>Papeterie haut de gamme, Bruxelles</span></span><span class="co"><img src="img/lt-logo.webp" alt=""></span></summary>
+        <p>En un après-midi avec la gérante&nbsp;: sa boîte Gmail connectée à Claude, Claude ajouté dans Chrome, et quatre pages de son site WordPress corrigées en quelques minutes au lieu de plusieurs heures. Sa boutique en ligne compte près de 900 produits, chacun en français et en anglais, soit environ 1&nbsp;765 fiches. Les mettre à jour à la main prenait des heures. Une routine s’en charge maintenant, guidée par un fichier qui décrit la boutique, son éthique et son goût visuel.</p>
+      </details>
+      <details>
+        <summary><img class="av" src="img/headshot.webp" alt=""><span class="who"><b>Support client</b><span>Vanssay, mon entreprise</span></span><span class="co glyph"><img src="img/glyph-white.png" alt=""></span></summary>
+        <p>Un mail arrive. L’IA retrouve le compte du client, vérifie le problème sur le vrai produit et propose une réponse dans mon ton. Je relis, j’envoie.</p>
+      </details>
+      <details>
+        <summary><img class="av" src="img/headshot.webp" alt=""><span class="who"><b>Mémoire de l’entreprise</b><span>78 notes, 31 routines</span></span><span class="co glyph"><img src="img/glyph-white.png" alt=""></span></summary>
+        <p>Un fichier décrit mes produits, mes clients, mes règles et mes décisions passées. Chaque séance de travail repart de là, au lieu de repartir de zéro.</p>
+      </details>
+      <details>
+        <summary><img class="av" src="img/headshot.webp" alt=""><span class="who"><b>Mises en ligne</b><span>Une application Wix en deux jours</span></span><span class="co glyph"><img src="img/glyph-white.png" alt=""></span></summary>
+        <p>De la décision à une application en ligne sur Wix en deux jours, en novembre 2026. Chaque étape attend mon accord avant de partir.</p>
+      </details>
+      <details>
+        <summary><img class="av" src="img/headshot.webp" alt=""><span class="who"><b>Facturation</b><span>Factures et ventes, sans moi</span></span><span class="co glyph"><img src="img/glyph-white.png" alt=""></span></summary>
+        <p>Abonnement payé, facture émise avec le numéro suivant de la série, vente ajoutée au tableau de bord.</p>
+      </details>
+      <details>
+        <summary><img class="av" src="img/headshot.webp" alt=""><span class="who"><b>Administratif</b><span>Même les impôts</span></span><span class="co glyph"><img src="img/glyph-white.png" alt=""></span></summary>
+        <p>Déclaration de CFE, demande de numéro de TVA, courriers aux impôts&nbsp;: préparés avec l’IA, vérifiés par moi.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="pricing" id="tarifs">
+    <div class="row-head">
+      <h2>Tarifs</h2>
+      <p>Autre besoin&nbsp;? <a href="#contact">Écrivez-moi</a></p>
+    </div>
+    <div class="plans">
+      <article class="plan">
+        <div class="plan-top">
+          <div class="plan-row"><span class="pi"><img src="img/glyph-white.png" alt=""></span><span class="badge">DEMI-JOURNÉE</span></div>
+          <h3>Séance</h3>
+          <p class="desc">Une demi-journée avec votre équipe, sur ses vraies tâches, pour que tout le monde se serve vraiment de l’IA.</p>
+          <p class="price"><b>900</b><small>€ / équipe</small></p>
+          <a class="btn btn-dark" href="#contact">Réserver un appel</a>
+        </div>
+        <ul class="plan-foot">
+          <li>Appel de préparation</li><li>Fichier de l’entreprise</li>
+          <li>Sur place ou en visio</li><li>2 à 3 routines</li>
+          <li>Outils connectés</li><li>Récap écrit</li>
+        </ul>
+      </article>
+      <article class="plan">
+        <div class="plan-top">
+          <div class="plan-row"><span class="pi"><img src="img/glyph-white.png" alt=""></span><span class="badge">PRIX FIXE</span></div>
+          <h3>Automatisation</h3>
+          <p class="desc">Une tâche entière confiée à l’IA, construite et installée dans vos outils. Périmètre et prix fixés par écrit avant de commencer.</p>
+          <p class="price"><small>dès</small><b>2&nbsp;500</b><small>€</small></p>
+          <a class="btn btn-dark" href="#contact">Réserver un appel</a>
+        </div>
+        <ul class="plan-foot">
+          <li>Construite pour vous</li><li>Prix fixe</li>
+          <li>Installée dans vos outils</li><li>Devis écrit</li>
+          <li>Équipe formée dessus</li><li>Mise en route suivie</li>
+        </ul>
+      </article>
+      <article class="plan dark">
+        <div class="plan-top">
+          <div class="plan-row"><span class="pi"><img src="img/glyph-black.png" alt=""></span><span class="badge">SUR DEVIS</span></div>
+          <h3>Sur mesure</h3>
+          <p class="desc">Un vrai logiciel quand une tâche le mérite. Construit, hébergé et entretenu par moi.</p>
+          <p class="price"><b>Parlons-en</b></p>
+          <a class="btn btn-grey" href="#contact">Réserver un appel</a>
+        </div>
+        <ul class="plan-foot">
+          <li>Logiciel sur mesure</li><li>Suivi dès 150&nbsp;€ / mois</li>
+          <li>Hébergement inclus</li><li>Un seul interlocuteur</li>
+          <li>Entretien et mises à jour</li><li>De bout en bout</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wordmark" id="wordmark" aria-hidden="true"><span>Vanssay</span></div>
+  <div class="foot-grid">
+    <div class="foot-contact">
+      <span class="fi"><img src="img/glyph-black.png" alt=""></span>
+      <b>Écrivez-moi</b>
+      <p>Une question avant de réserver un appel&nbsp;?</p>
+      <div class="field"><span id="mail">support@vanssay.net</span><button type="button" id="copy">Copier</button></div>
+    </div>
+    <div class="foot-col">
+      <b>En savoir plus</b>
+      <a href="#services">Services</a>
+      <a href="#travaux">Travaux</a>
+      <a href="#tarifs">Tarifs</a>
+    </div>
+    <div class="foot-col">
+      <b>Me suivre</b>
+      <a href="https://www.linkedin.com/in/marin-de-vanssay/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://x.com/MarindeVanssay" target="_blank" rel="noopener">X</a>
+    </div>
+  </div>
+  <p class="legal">Vanssay · Marin de Vanssay © 2026</p>
+  <div class="pattern" id="pattern" aria-hidden="true"></div>
+</footer>
+
+<script>
+(function () {
+  // Nantes clock, like Haptic's city clocks
+  var clk = document.getElementById("clk");
+  var fmt = new Intl.DateTimeFormat("fr-FR", { timeZone: "Europe/Paris", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false });
+  function tick() { clk.textContent = fmt.format(new Date()); }
+  tick(); setInterval(tick, 1000);
+
+  // Header turns solid after the hero; second notification card leaves after the first screens
+  var nav = document.getElementById("nav"), hero = document.getElementById("top"), note2 = document.getElementById("note2");
+  function onScroll() {
+    var y = window.scrollY;
+    nav.classList.toggle("solid", y > hero.offsetHeight - 220);
+    note2.classList.toggle("gone", y > hero.offsetHeight * 1.2);
+    reveal();
+  }
+
+  // Intro text fills in word by word as it scrolls past
+  var words = [];
+  document.querySelectorAll(".reveal").forEach(function (p) {
+    var parts = p.textContent.split(/(\s+)/);
+    p.textContent = "";
+    parts.forEach(function (t) {
+      if (/^\s+$/.test(t)) { p.appendChild(document.createTextNode(t)); return; }
+      var s = document.createElement("span"); s.className = "w"; s.textContent = t; p.appendChild(s); words.push(s);
+    });
+  });
+  var block = document.querySelector(".intro-in");
+  function reveal() {
+    if (!words.length) return;
+    var r = block.getBoundingClientRect(), vh = window.innerHeight;
+    var p = (vh * 0.9 - r.top) / (r.height + vh * 0.2);
+    p = Math.max(0, Math.min(1, p));
+    var n = Math.round(p * words.length * 1.15);
+    words.forEach(function (w, i) { w.classList.toggle("on", i < n); });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  onScroll();
+
+  // One accordion item open at a time
+  var items = document.querySelectorAll(".acc details");
+  items.forEach(function (d) {
+    d.addEventListener("toggle", function () {
+      if (d.open) items.forEach(function (o) { if (o !== d) o.open = false; });
+    });
+  });
+
+  // Copy the address; fall back to selecting it
+  var btn = document.getElementById("copy"), mail = document.getElementById("mail");
+  btn.addEventListener("click", function () {
+    function sel() { var r = document.createRange(); r.selectNodeContents(mail); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+    try {
+      navigator.clipboard.writeText(mail.textContent).then(function () { btn.textContent = "Copié"; setTimeout(function () { btn.textContent = "Copier"; }, 1600); }, sel);
+    } catch (e) { sel(); }
+  });
+
+  // Footer band: white discs taller than the band, touching side by side, so black wedges meet between them
+  var band = document.getElementById("pattern");
+  var sizes = [0.35, 0.9, 0.5, 1.2, 0.4, 0.75, 1.0, 0.3, 0.6, 1.1];
+  function drawBand() {
+    band.textContent = "";
+    var h = band.offsetHeight, w = band.offsetWidth, x = -h * 0.2, k = 0;
+    while (x < w) {
+      var d = h * sizes[k % sizes.length];
+      var i = document.createElement("i");
+      i.style.width = d + "px";
+      i.style.height = (h * 1.3) + "px";
+      i.style.left = x + "px";
+      band.appendChild(i);
+      x += d; k++;
+    }
+  }
+
+  // Footer wordmark fills the full width, like Haptic's
+  var wm = document.getElementById("wordmark"), wmText = wm.firstElementChild;
+  function fitWordmark() {
+    wmText.style.fontSize = "200px";
+    var avail = wm.clientWidth - parseFloat(getComputedStyle(wm).paddingLeft) - parseFloat(getComputedStyle(wm).paddingRight);
+    wmText.style.fontSize = (200 * avail / wmText.scrollWidth) + "px";
+  }
+  function layoutFooter() { drawBand(); fitWordmark(); }
+  layoutFooter();
+  window.addEventListener("resize", layoutFooter);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitWordmark);
+
+  // Respect reduced motion for the hero video
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.querySelectorAll("video").forEach(function (v) { v.removeAttribute("autoplay"); v.pause(); });
+  }
+})();
+</script>
+
+</body>
+</html>
