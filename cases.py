@@ -65,7 +65,8 @@ def relink(s):
 CASE_CSS = """
 .case .nav { background: rgba(16, 18, 20, .72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
 .c-wrap { max-width: 1050px; margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad-r); }
-.c-head { padding-top: clamp(110px, 13vw, 170px); padding-bottom: clamp(40px, 5vw, 64px); display: grid; gap: 22px; }
+.hero.c-strip { height: clamp(150px, 16vw, 220px); min-height: 0; }
+.c-head { padding-top: clamp(48px, 6vw, 84px); padding-bottom: clamp(40px, 5vw, 64px); display: grid; gap: 22px; }
 .c-kicker { display: flex; align-items: center; gap: 12px; }
 .c-kicker .av { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; }
 .c-head h1 { font-size: clamp(34px, 3.6vw, 52px); line-height: 1.04; letter-spacing: -.03em; max-width: 15em; text-wrap: balance; }
@@ -369,6 +370,11 @@ def page(c):
 <body class="case">
 {relink(HOME_TOP)}
 <main>
+  <section class="hero c-strip" aria-hidden="true">
+    <canvas class="hero-media"></canvas>
+    <div class="hero-grain"></div>
+    <div class="hero-shade"></div>
+  </section>
   <section class="c-wrap c-head" id="top">
     <p class="c-kicker">{thumb(c['icon'])}<span class="label">Étude de cas</span></p>
     <h1>{esc(c['title'])}</h1>

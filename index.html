@@ -80,11 +80,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 .note {
   display: grid; grid-template-columns: 40px 1fr auto; align-items: center; gap: 12px;
   padding: 12px 14px; border-radius: 14px;
-  background: rgba(236, 236, 238, .86); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, .10); color: var(--black);
+  background: rgba(255, 255, 255, .96); border: 1px solid rgba(0, 0, 0, .06);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, .14), 0 1px 2px rgba(0, 0, 0, .06); color: var(--black);
   transition: opacity .35s ease, transform .35s ease;
 }
-.note:hover .chip { background: #c9c9cd; }
+.note:hover .chip { background: #e2e2e6; }
 .note.gone { opacity: 0; transform: translateY(-8px); pointer-events: none; }
 .ni { width: 40px; height: 40px; border-radius: 10px; overflow: hidden; background: var(--black); display: grid; place-items: center; }
 .ni img { width: 100%; height: 100%; object-fit: cover; }
@@ -92,7 +92,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 .nt { display: grid; min-width: 0; line-height: 1.25; }
 .nt b { font-weight: 600; font-size: 14px; }
 .nt span { font-size: 13px; color: #6e6e73; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.chip { font-size: 11px; font-weight: 600; letter-spacing: .02em; padding: 4px 7px; border-radius: 5px; background: #d8d8dc; }
+.chip { font-size: 11px; font-weight: 600; letter-spacing: .02em; padding: 4px 7px; border-radius: 5px; background: #efeff2; }
 @media (max-width: 700px) { .notes { display: none; } }
 
 /* Hero */
@@ -593,9 +593,8 @@ footer { border-top: 1px solid var(--g2); }
   // Hero background: crisp colored shapes (circles, diamonds, rings) drifting very slowly on black,
   // seen through fixed vertical and horizontal glass strips: some strips sharp, some lightly blurred, some heavily blurred.
   // Drawn live, so there is no video, no loop and no cut.
-  (function () {
-    var cv = document.getElementById("heroCanvas");
-    if (!cv || !cv.getContext) return;
+  document.querySelectorAll("canvas.hero-media").forEach(function (cv) {
+    if (!cv.getContext) return;
     var ctx = cv.getContext("2d");
     var SCALE = 0.6, W = 0, H = 0;
     var S = document.createElement("canvas"), sctx = S.getContext("2d");   // sharp layer
@@ -717,7 +716,7 @@ footer { border-top: 1px solid var(--g2); }
       new IntersectionObserver(function (e) { setRunning(e[0].isIntersecting && !document.hidden); }).observe(cv);
     }
     document.addEventListener("visibilitychange", function () { setRunning(!document.hidden); });
-  })();
+  });
 })();
 </script>
 
