@@ -55,7 +55,7 @@ HOME_SCRIPT = re.search(r"(<script>.*?</script>)", HOME, re.S).group(1)
 def relink(s):
     """Home page links and assets, seen from cas/<slug>.html."""
     s = s.replace('href="#top"', 'href="../"')
-    for a in ("travaux", "services", "tarifs"):
+    for a in ("methodes", "travaux", "services", "tarifs"):
         s = s.replace(f'href="#{a}"', f'href="../#{a}"')
     s = s.replace('href="cas/', 'href="')
     s = s.replace('src="img/', 'src="../img/')
@@ -229,7 +229,7 @@ case(
             ("Fiche Google de Le Typographe", "lecture seule, on ne modifie jamais rien"),
         ]),
         ("Pour votre entreprise", "prose", [
-            "Le même principe s'applique à n'importe quelle PME : un fichier qui décrit votre métier, vos règles et votre ton, que l'IA lit avant chaque tâche. C'est ce qu'on a installé chez Le Typographe.",
+            "Le même principe s'applique à n'importe quelle entreprise, même d'une seule personne : un fichier qui décrit votre métier, vos règles et votre ton, que l'IA lit avant chaque tâche. C'est ce qu'on a installé chez Le Typographe.",
         ]),
     ],
 )
@@ -296,7 +296,7 @@ case(
             "<b>Les courriers au service des impôts</b>, rédigés à partir de mes notes.",
         ]),
         ("La règle", "prose", [
-            "L'IA lit les notices, remplit et rédige. Je relis chaque ligne et c'est moi qui envoie. Pour une PME, c'est la même chose avec les déclarations, les relances ou les dossiers de subvention.",
+            "L'IA lit les notices, remplit et rédige. Je relis chaque ligne et c'est moi qui envoie. Pour un indépendant ou une PME, c'est la même chose avec les déclarations, les relances ou les dossiers de subvention.",
         ]),
     ],
 )
@@ -388,7 +388,7 @@ def page(c):
     <div class="hero-grain" aria-hidden="true"></div>
     <div class="hero-shade"></div>
     <div class="hero-in">
-      <h1>Une tâche comme celle‑ci dans votre équipe&nbsp;?</h1>
+      <h1>Une tâche comme celle‑ci chez vous&nbsp;?</h1>
       <a class="btn btn-glass" href="https://calendly.com/marindv-pro/appel-decouverte" target="_blank" rel="noopener">Réserver un appel de 15&nbsp;min</a>
     </div>
   </section>

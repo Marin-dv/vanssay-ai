@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Marin de Vanssay · Formation et automatisations IA pour les PME</title>
-<meta name="description" content="J’apprends à votre équipe à se servir de l’IA sur ses vraies tâches, puis je construis ce qui manque pour que tout tourne dans vos outils.">
+<title>Marin de Vanssay · Cours et ateliers IA pour indépendants, TPE et PME</title>
+<meta name="description" content="Je vous apprends à vous servir de l’IA sur vos vraies tâches, seul ou avec votre équipe, puis je construis ce qui manque pour que tout tourne dans vos outils.">
 <link rel="canonical" href="https://ai.vanssay.net/">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
 <link rel="apple-touch-icon" href="/favicon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ai.vanssay.net/">
-<meta property="og:title" content="Marin de Vanssay · Formation et automatisations IA pour les PME">
-<meta property="og:description" content="J’apprends à votre équipe à se servir de l’IA sur ses vraies tâches, puis je construis ce qui manque pour que tout tourne dans vos outils.">
+<meta property="og:title" content="Marin de Vanssay · Cours et ateliers IA pour indépendants, TPE et PME">
+<meta property="og:description" content="Je vous apprends à vous servir de l’IA sur vos vraies tâches, seul ou avec votre équipe, puis je construis ce qui manque pour que tout tourne dans vos outils.">
 <meta property="og:image" content="https://ai.vanssay.net/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -181,6 +181,45 @@ canvas.hero-media.css-blur { filter: blur(40px); transform: scale(1.1); }
 @media (max-width: 420px) { .svc li { white-space: normal; } }
 @media (max-width: 760px) { .services-in { grid-template-columns: 1fr; } }
 
+/* Hero subtitle */
+.hero-sub { font-size: 17px; line-height: 1.35; max-width: 30em; margin-top: -8px; color: rgba(255, 255, 255, .88); text-shadow: 0 1px 18px rgba(0, 0, 0, .35); }
+
+/* Methods (same cards as the flyer) */
+.methods { padding: 0 var(--pad-r) clamp(80px, 10vw, 140px) var(--pad); }
+.m-head { display: grid; gap: 12px; max-width: 640px; margin-bottom: 28px; }
+.m-head h2 { font-size: clamp(30px, 3.2vw, 44px); line-height: 1.05; letter-spacing: -.035em; text-wrap: balance; }
+.m-head p:last-child { font-size: 16px; color: #6e6e73; }
+.mgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.mcard { display: flex; flex-direction: column; gap: 8px; padding: 20px; border-radius: 12px; background: var(--g1); min-width: 0; }
+.mcard.wide { grid-column: span 2; }
+.mcard h3 { font-size: 18px; font-weight: 600; line-height: 1.2; letter-spacing: -.02em; }
+.mdesc { font-size: 15px; line-height: 1.4; color: #6e6e73; }
+.mnum { margin-top: auto; padding-top: 18px; display: flex; align-items: flex-end; gap: 12px; }
+.mnum b { flex: none; font-size: clamp(48px, 5vw, 64px); font-weight: 500; line-height: .9; letter-spacing: -.045em; }
+.mnum span { font-size: 14px; line-height: 1.3; color: #3a3a3c; }
+.proof { margin-top: auto; padding-top: 10px; display: flex; gap: 8px; align-items: baseline; font-size: 14px; line-height: 1.4; }
+.proof::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .2); flex: none; transform: translateY(-1px); }
+.proof a { font-weight: 600; border-bottom: 1px solid currentColor; white-space: nowrap; }
+.proof a:hover { opacity: .6; }
+.mcard.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0; padding: 0; overflow: hidden; }
+.mcard.split > img { width: 100%; height: 100%; min-height: 220px; object-fit: cover; object-position: left top; }
+.mcard.banner { padding: 0; overflow: hidden; }
+.mcard.banner > img { width: 100%; aspect-ratio: 4 / 1; object-fit: cover; }
+.mbody { display: flex; flex-direction: column; gap: 8px; padding: 20px; flex: 1; min-width: 0; }
+.msplit { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+.msplit > div { display: grid; gap: 8px; }
+.msteps { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; font-size: 14px; line-height: 1.25; }
+.msteps li { display: flex; align-items: center; gap: 10px; padding: 8px 12px 8px 8px; border-radius: 9px; background: var(--white); }
+.msteps b { flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--green); display: grid; place-items: center; font-size: 12px; font-weight: 600; }
+.msplit + .proof.sep { margin-top: auto; padding-top: 14px; border-top: 1px solid #e2e2e6; }
+.msplit { margin-bottom: 14px; }
+@media (max-width: 960px) { .mgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) {
+  .mgrid { grid-template-columns: 1fr; } .mcard.wide { grid-column: auto; }
+  .mcard.split { grid-template-columns: 1fr; } .mcard.split > img { min-height: 0; aspect-ratio: 16 / 9; }
+  .msplit { grid-template-columns: 1fr; }
+}
+
 /* Accordion (Haptic's testimonial list) */
 .cases { padding: 0 var(--pad-r) clamp(80px, 11vw, 160px) var(--pad); }
 .acc { max-width: 542px; margin: 0 auto; display: grid; gap: 8px; }
@@ -229,6 +268,9 @@ canvas.hero-media.css-blur { filter: blur(40px); transform: scale(1.1); }
 .plan.dark .badge { background: rgba(157, 255, 94, .14); color: var(--green); }
 .plan.dark .plan-foot { background: #111113; color: #8e8e93; }
 .plan.dark .plan-foot li::before { background: #4a4a4d; }
+.plans-more { margin-top: 18px; font-size: 14px; color: #6e6e73; }
+.plans-more a { color: var(--black); border-bottom: 1px solid currentColor; }
+.plans-more a:hover { opacity: .6; }
 @media (max-width: 960px) { .plans { grid-template-columns: 1fr; } }
 
 /* Footer */
@@ -261,6 +303,7 @@ footer { border-top: 1px solid var(--g2); }
   <div class="nav-in">
     <a class="brand" href="#top">Marin de Vanssay</a>
     <nav class="links" aria-label="Sections">
+      <a href="#methodes">Méthodes</a>
       <a href="#travaux">Travaux</a>
       <a href="#services">Services</a>
       <a href="#tarifs">Tarifs</a>
@@ -272,7 +315,7 @@ footer { border-top: 1px solid var(--g2); }
 <aside class="notes" aria-label="Raccourcis">
   <a class="note" href="https://calendly.com/marindv-pro/appel-decouverte" target="_blank" rel="noopener">
     <span class="ni glyph"><img src="img/glyph-white.png" alt=""></span>
-    <span class="nt"><b>Réserver un appel</b><span>Parlons de votre équipe</span></span>
+    <span class="nt"><b>Réserver un appel</b><span>Premier appel gratuit, 15 min</span></span>
     <span class="chip">CONTACT</span>
   </a>
   <a class="note" id="note2" href="cas/le-typographe.html">
@@ -289,7 +332,8 @@ footer { border-top: 1px solid var(--g2); }
     <div class="hero-shade"></div>
     <div class="hero-logo" aria-hidden="true"><img src="img/glyph-white.svg" alt=""><span>Vanssay</span></div>
     <div class="hero-in">
-      <h1>Formation et automatisations IA pour les PME</h1>
+      <h1>Apprenez à vous servir de l’IA</h1>
+      <p class="hero-sub">Cours particuliers et ateliers d’équipe, sur vos vraies tâches. Pour les indépendants, les TPE et les PME.</p>
       <a class="btn btn-glass" href="https://calendly.com/marindv-pro/appel-decouverte" target="_blank" rel="noopener">Réserver un appel</a>
     </div>
   </section>
@@ -308,7 +352,7 @@ footer { border-top: 1px solid var(--g2); }
     <div class="intro-in">
       <div>
         <p class="label">Introduction</p>
-        <p class="reveal">J’apprends à votre équipe à se servir de l’IA sur ses vraies tâches, puis je construis ce qui manque pour que tout tourne dans vos outils.</p>
+        <p class="reveal">Je vous apprends à vous servir de l’IA sur vos vraies tâches, seul ou avec votre équipe, puis je construis ce qui manque pour que tout tourne dans vos outils.</p>
         <p class="reveal">J’enseigne depuis plus de quatre ans, et je fais tourner seul ma propre entreprise de logiciels avec l’IA.</p>
       </div>
       <div>
@@ -318,6 +362,56 @@ footer { border-top: 1px solid var(--g2); }
           <span class="mc-foot"><img class="mc-ic" src="img/lt-logo.webp" alt=""><span><b>Le Typographe</b><span>Papeterie, Bruxelles</span></span></span>
         </a>
       </div>
+    </div>
+  </section>
+
+  <section class="methods" id="methodes">
+    <div class="m-head">
+      <p class="label">Ce que je vous apprends</p>
+      <h2>Bien plus qu’un moteur de recherche</h2>
+      <p>Cinq méthodes que peu de gens utilisent. Je m’en sers pour faire tourner seul ma propre entreprise de logiciels.</p>
+    </div>
+    <div class="mgrid">
+      <article class="mcard">
+        <h3>Une IA qui vous connaît</h3>
+        <p class="mdesc">Un fichier décrit qui vous êtes, ce que vous faites et votre façon d’écrire. Elle ne repart jamais de zéro.</p>
+        <p class="mnum"><b>70+</b><span>notes sur mon entreprise, qu’elle relit à chaque fois</span></p>
+      </article>
+      <article class="mcard">
+        <h3>Une tâche apprise une fois</h3>
+        <p class="mdesc">Montrez-lui une tâche une fois. Ensuite, une phrase suffit pour la relancer.</p>
+        <p class="mnum"><b>1&nbsp;765</b><span>fiches produits mises à jour par une seule routine</span></p>
+      </article>
+      <article class="mcard wide split">
+        <img src="img/methode-site.webp" alt="Le site de la papeterie Le Typographe" loading="lazy" width="1000" height="569">
+        <div class="mbody">
+          <h3>L’IA qui clique pour vous</h3>
+          <p class="mdesc">Elle ouvre votre navigateur, remplit les formulaires et modifie votre site. Vous la regardez faire.</p>
+          <p class="proof"><span>4 pages du site d’une papeterie corrigées en quelques minutes. <a href="cas/le-typographe.html">Voir le cas</a></span></p>
+        </div>
+      </article>
+      <article class="mcard wide">
+        <div class="msplit">
+          <div>
+            <h3>Elle corrige, puis répond</h3>
+            <p class="mdesc">Elle connaît votre entreprise et y a accès. Un client signale un problème&nbsp;: elle le règle dans vos outils, puis lui écrit la bonne réponse.</p>
+          </div>
+          <ol class="msteps">
+            <li><b>1</b><span>Un client écrit</span></li>
+            <li><b>2</b><span>Elle corrige dans vos outils</span></li>
+            <li><b>3</b><span>Elle lui répond, vous relisez</span></li>
+          </ol>
+        </div>
+        <p class="proof sep"><span>C’est ainsi que tourne le support de mes logiciels. <a href="cas/support-client.html">Voir deux vrais échanges</a></span></p>
+      </article>
+      <article class="mcard wide banner">
+        <img src="img/banniere-linkedin.webp" alt="Ma bannière LinkedIn : falaises bretonnes, Vanssay et IMT Atlantique" loading="lazy" width="1600" height="400">
+        <div class="mbody">
+          <h3>Votre studio graphique</h3>
+          <p class="mdesc">Comme un chef d’orchestre, une IA dirige d’autres IA spécialisées pour créer vos visuels.</p>
+          <p class="proof"><span>Ma bannière LinkedIn, née de plusieurs IA travaillant ensemble.</span></p>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -374,7 +468,8 @@ footer { border-top: 1px solid var(--g2); }
       <div>
         <p class="label">Services</p>
         <ul class="svc">
-          <li>Séances IA en équipe</li>
+          <li>Cours individuels</li>
+          <li>Ateliers d’équipe</li>
           <li>Fichier de votre entreprise</li>
           <li>Routines sur mesure</li>
           <li>Automatisations</li>
@@ -429,11 +524,39 @@ footer { border-top: 1px solid var(--g2); }
     <div class="plans">
       <article class="plan">
         <div class="plan-top">
-          <div class="plan-row"><span class="pi"><img src="img/glyph-white.png" alt=""></span><span class="badge">DEMI-JOURNÉE</span></div>
-          <h3>Séance</h3>
+          <div class="plan-row"><span class="pi"><img src="img/glyph-white.png" alt=""></span><span class="badge">1 À 1</span></div>
+          <h3>Indépendants</h3>
+          <p class="desc">Pour vous servir de l’IA dans votre activité et au quotidien, à votre rythme.</p>
+          <p class="price"><b>Parlons-en</b></p>
+          <a class="btn btn-dark" href="https://calendly.com/marindv-pro/appel-decouverte" target="_blank" rel="noopener">Réserver un appel</a>
+        </div>
+        <ul class="plan-foot">
+          <li>Sur vos vraies tâches</li><li>Sur place ou en visio</li>
+          <li>Fichier qui vous décrit</li><li>Outils connectés</li>
+          <li>Routines installées</li><li>Récap écrit</li>
+        </ul>
+      </article>
+      <article class="plan">
+        <div class="plan-top">
+          <div class="plan-row"><span class="pi"><img src="img/glyph-white.png" alt=""></span><span class="badge">1 À 1</span></div>
+          <h3>Dirigeants</h3>
+          <p class="desc">TPE et PME&nbsp;: l’IA d’abord sur votre propre travail, avant de la proposer à votre équipe.</p>
+          <p class="price"><b>Parlons-en</b></p>
+          <a class="btn btn-dark" href="https://calendly.com/marindv-pro/appel-decouverte" target="_blank" rel="noopener">Réserver un appel</a>
+        </div>
+        <ul class="plan-foot">
+          <li>Sur votre propre travail</li><li>Sur place ou en visio</li>
+          <li>Fichier de l’entreprise</li><li>Outils connectés</li>
+          <li>Tâches à confier repérées</li><li>Récap écrit</li>
+        </ul>
+      </article>
+      <article class="plan dark">
+        <div class="plan-top">
+          <div class="plan-row"><span class="pi"><img src="img/glyph-black.png" alt=""></span><span class="badge">ATELIER</span></div>
+          <h3>Équipes</h3>
           <p class="desc">Une demi-journée avec votre équipe, sur ses vraies tâches, pour que tout le monde se serve vraiment de l’IA.</p>
           <p class="price"><b>900</b><small>€ / équipe</small></p>
-          <a class="btn btn-dark" href="https://calendly.com/marindv-pro/appel-decouverte" target="_blank" rel="noopener">Réserver un appel</a>
+          <a class="btn btn-grey" href="https://calendly.com/marindv-pro/appel-decouverte" target="_blank" rel="noopener">Réserver un appel</a>
         </div>
         <ul class="plan-foot">
           <li>Appel de préparation</li><li>Fichier de l’entreprise</li>
@@ -441,35 +564,8 @@ footer { border-top: 1px solid var(--g2); }
           <li>Outils connectés</li><li>Récap écrit</li>
         </ul>
       </article>
-      <article class="plan">
-        <div class="plan-top">
-          <div class="plan-row"><span class="pi"><img src="img/glyph-white.png" alt=""></span><span class="badge">PRIX FIXE</span></div>
-          <h3>Automatisation</h3>
-          <p class="desc">Une tâche entière confiée à l’IA, construite et installée dans vos outils. Périmètre et prix fixés par écrit avant de commencer.</p>
-          <p class="price"><small>dès</small><b>2&nbsp;500</b><small>€</small></p>
-          <a class="btn btn-dark" href="https://calendly.com/marindv-pro/appel-decouverte" target="_blank" rel="noopener">Réserver un appel</a>
-        </div>
-        <ul class="plan-foot">
-          <li>Construite pour vous</li><li>Prix fixe</li>
-          <li>Installée dans vos outils</li><li>Devis écrit</li>
-          <li>Équipe formée dessus</li><li>Mise en route suivie</li>
-        </ul>
-      </article>
-      <article class="plan dark">
-        <div class="plan-top">
-          <div class="plan-row"><span class="pi"><img src="img/glyph-black.png" alt=""></span><span class="badge">SUR DEVIS</span></div>
-          <h3>Sur mesure</h3>
-          <p class="desc">Un vrai logiciel quand une tâche le mérite. Construit, hébergé et entretenu par moi.</p>
-          <p class="price"><b>Parlons-en</b></p>
-          <a class="btn btn-grey" href="https://calendly.com/marindv-pro/appel-decouverte" target="_blank" rel="noopener">Réserver un appel</a>
-        </div>
-        <ul class="plan-foot">
-          <li>Logiciel sur mesure</li><li>Suivi dès 150&nbsp;€ / mois</li>
-          <li>Hébergement inclus</li><li>Un seul interlocuteur</li>
-          <li>Entretien et mises à jour</li><li>De bout en bout</li>
-        </ul>
-      </article>
     </div>
+    <p class="plans-more">Besoin d’aller plus loin&nbsp;? Une tâche entière automatisée dans vos outils, dès 2&nbsp;500&nbsp;€, ou un logiciel sur mesure, sur devis. <a href="https://calendly.com/marindv-pro/appel-decouverte" target="_blank" rel="noopener">Parlons-en</a></p>
   </section>
 </main>
 
@@ -484,6 +580,7 @@ footer { border-top: 1px solid var(--g2); }
     </div>
     <div class="foot-col">
       <b>En savoir plus</b>
+      <a href="#methodes">Méthodes</a>
       <a href="#services">Services</a>
       <a href="#travaux">Travaux</a>
       <a href="#tarifs">Tarifs</a>

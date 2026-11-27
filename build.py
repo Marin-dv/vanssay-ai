@@ -11,8 +11,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = pathlib.Path(__file__).resolve().parent
 URL = "https://ai.vanssay.net/"
-TITLE = "Marin de Vanssay · Formation et automatisations IA pour les PME"
-DESC = ("J’apprends à votre équipe à se servir de l’IA sur ses vraies tâches, "
+TITLE = "Marin de Vanssay · Cours et ateliers IA pour indépendants, TPE et PME"
+DESC = ("Je vous apprends à vous servir de l’IA sur vos vraies tâches, seul ou avec votre équipe, "
         "puis je construis ce qui manque pour que tout tourne dans vos outils.")
 
 page = (ROOT / "page.html").read_text(encoding="utf-8")
@@ -78,6 +78,6 @@ total = 92 + 24 + text_w
 x0 = (w - total) / 2
 og.paste(glyph, (int(x0), 630 // 2 - 46 - 20), glyph)
 d.text((x0 + 92 + 24, 630 // 2 - 20), "Vanssay", font=font, fill=(255, 255, 255), anchor="lm")
-d.text((48, 630 - 56), "Formation et automatisations IA pour les PME", font=small, fill=(235, 235, 235), anchor="lm")
+d.text((48, 630 - 56), "Cours et ateliers IA pour indépendants, TPE et PME", font=small, fill=(235, 235, 235), anchor="lm")
 og.save(ROOT / "img" / "og.jpg", quality=86)
 print("built index.html, robots.txt, sitemap.xml, img/og.jpg")
