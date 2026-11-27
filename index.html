@@ -124,8 +124,12 @@ canvas.hero-media.css-blur { filter: blur(40px); transform: scale(1.1); }
 .logos { padding: 44px 0 30px; }
 .logos .label { padding-left: var(--pad); margin-bottom: 26px; }
 .marquee { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-.track { display: flex; gap: 88px; width: max-content; animation: slide 38s linear infinite; padding-right: 88px; }
-.track span { font-size: 30px; font-weight: 600; letter-spacing: -.03em; color: #a1a1a6; white-space: nowrap; }
+.track { display: flex; align-items: center; gap: 80px; width: max-content; animation: slide 38s linear infinite; padding-right: 80px; }
+.track img { flex: none; height: 30px; width: auto; max-width: none; filter: grayscale(1); opacity: .55; transition: filter .3s ease, opacity .3s ease; }
+.track img:hover { filter: none; opacity: 1; }
+.track .lg-claude { height: 28px; } .track .lg-wordpress { height: 26px; } .track .lg-shopify { height: 32px; }
+.track .lg-wix, .track .lg-webflow { height: 22px; }
+@media (max-width: 640px) { .track { gap: 56px; padding-right: 56px; } .track img { height: 24px; } .track .lg-claude { height: 22px; } .track .lg-wordpress { height: 21px; } .track .lg-shopify { height: 26px; } .track .lg-wix, .track .lg-webflow { height: 18px; } }
 @keyframes slide { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .track { animation: none; } .marquee { overflow-x: auto; } }
 
@@ -342,8 +346,8 @@ footer { border-top: 1px solid var(--g2); }
     <p class="label">Les outils avec lesquels je travaille</p>
     <div class="marquee">
       <div class="track">
-        <span>Claude</span><span>Gmail</span><span>Google Drive</span><span>Outlook</span><span>WordPress</span><span>Shopify</span><span>Wix</span><span>Webflow</span><span>Framer</span><span>Stripe</span><span>Notion</span>
-        <span aria-hidden="true">Claude</span><span aria-hidden="true">Gmail</span><span aria-hidden="true">Google Drive</span><span aria-hidden="true">Outlook</span><span aria-hidden="true">WordPress</span><span aria-hidden="true">Shopify</span><span aria-hidden="true">Wix</span><span aria-hidden="true">Webflow</span><span aria-hidden="true">Framer</span><span aria-hidden="true">Stripe</span><span aria-hidden="true">Notion</span>
+        <img class="lg-claude" src="img/logos/claude.svg" alt="Claude"><img src="img/logos/gmail.svg" alt="Gmail"><img src="img/logos/google-drive.svg" alt="Google Drive"><img src="img/logos/outlook.svg" alt="Outlook"><img class="lg-wordpress" src="img/logos/wordpress.svg" alt="WordPress"><img class="lg-shopify" src="img/logos/shopify.svg" alt="Shopify"><img class="lg-wix" src="img/logos/wix.svg" alt="Wix"><img class="lg-webflow" src="img/logos/webflow.svg" alt="Webflow"><img src="img/logos/framer.svg" alt="Framer"><img src="img/logos/stripe.svg" alt="Stripe"><img src="img/logos/notion.svg" alt="Notion">
+        <img class="lg-claude" src="img/logos/claude.svg" alt="" aria-hidden="true"><img src="img/logos/gmail.svg" alt="" aria-hidden="true"><img src="img/logos/google-drive.svg" alt="" aria-hidden="true"><img src="img/logos/outlook.svg" alt="" aria-hidden="true"><img class="lg-wordpress" src="img/logos/wordpress.svg" alt="" aria-hidden="true"><img class="lg-shopify" src="img/logos/shopify.svg" alt="" aria-hidden="true"><img class="lg-wix" src="img/logos/wix.svg" alt="" aria-hidden="true"><img class="lg-webflow" src="img/logos/webflow.svg" alt="" aria-hidden="true"><img src="img/logos/framer.svg" alt="" aria-hidden="true"><img src="img/logos/stripe.svg" alt="" aria-hidden="true"><img src="img/logos/notion.svg" alt="" aria-hidden="true">
       </div>
     </div>
   </section>
